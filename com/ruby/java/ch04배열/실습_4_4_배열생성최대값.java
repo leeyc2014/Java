@@ -14,32 +14,49 @@ import java.util.Random;
  *   최대값 = **
  *   최소값, 평균값 출력은 최대값 출력과 같다.
  *   
-
-
  */
 public class 실습_4_4_배열생성최대값 {
 	public static void main(String[] args) {
 		int price[] = new int[10];
+//		int max = price[0];
+//		int min = price[0];
+//		int sum = 0;
+		double avg = 0.0;
+		Random rd = new Random();
+		for (int i = 0; i < price.length; i++) {
+			price[i] = rd.nextInt(101);
+		}
 		int max = price[0];
 		int min = price[0];
 		int sum = 0;
-		double avg = 0.0;
-		Random rd = new Random();
-		for (int i = 1; i < price.length; i++) {
-			price[i] = rd.nextInt(100);
+		for (int i = 0; i < price.length; i++)	{
+//			if (i == 0) {
+//				max = min = price[i];		
+//				continue;
+//			}
 			sum += price[i];
-			if(price[i] > max)
-				max = price[i];
-			if(price[i] < min)
-				min = price[i];
+			if(price[i] > max)	max = price[i];
+			if(price[i] < min)	min = price[i];
 			avg = (double)sum/price.length;
-		}for(int num1 : price){
-			if(num1 == max)
-				System.out.println("최대값 = " + num1);	
-		}for(int num2 : price) {
-			if(num2 == min)
-				System.out.println("최소값 = " + num2);	
 		}
+//		for(int num1 : price){
+//			if(num1 == max)
+//				System.out.println("최대값 = " + num1);	
+//		}for(int num2 : price) {
+//			if(num2 == min)
+//				System.out.println("최소값 = " + num2);	
+//		}
+//		System.out.println("평균값 = " + avg);
+		int cnt = 0;
+		System.out.print("{");
+		for(int p : price) {
+			System.out.print(p);
+			if (++cnt < price.length)
+				System.out.print(",");
+		}
+		System.out.println("}");
+		System.out.println("최대값 = " + max);
+		System.out.println("최소값 = " + min);
 		System.out.println("평균값 = " + avg);
 		}
 }
