@@ -149,10 +149,38 @@ public class Gugudan {
 			System.out.println("출력안됨");
 		}
 	}
+	public static void printColumn2(int col2) {
+		if (col2 < 1 || 9 < col2) {
+			System.out.println("col is not valid![1~9]");
+			return;
+		}
 
+		for(int i = 2 ; i < 10 ; i+=col2) {
+			for(int j = 0 ; j < 10 ; j++) {
+				for (int k = 0 ; k < col2 ; k++) {
+
+					if (10 <= i+k) {
+						System.out.print("\n");
+						break;
+					}
+					if (j == 0) {
+						System.out.print((i+k) + "단\t");
+					}
+					else {
+						System.out.printf("%d * %d = %d", (i+k), j, (i+k)*j);
+					}
+					if (k < col2-1)	System.out.print("\t");
+					else			System.out.print("\n");
+				}
+			}
+			System.out.println();
+		}
+		
+	}
 	public static void main(String[] args) {
 		printVertical();
 		printHorizontal();
-		printColumn(1);
+		printColumn(2);
+		printColumn2(3);
 	}
 }
