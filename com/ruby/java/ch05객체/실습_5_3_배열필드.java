@@ -25,7 +25,7 @@ public class 실습_5_3_배열필드 {
 	        // 기본 정보 출력::name=**, age=**, weight=**로 출력
 	    	System.out.print("name = " +name + ", age = " + age + ", weight = " + weight);
 	        // 교육과목 및 수강 연도 출력
-	    	
+	    	System.out.print("
 	    	// while 문을 사용하여 교육과목과 수강연도를 출력
 	    	 
 	    }
