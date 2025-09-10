@@ -82,8 +82,15 @@ class Student {
 	}
 	
 	// 6.2.2 과목별 최대/최소 점수 및 해당 학생을 출력하는 정적 메소드
-	public static void printSubjectStats(Student[] students) {
-		
+	public void printSubjectStats(Student[] students) {
+		int max = scores[0];
+		int min = scores[0];
+		for(int i = 1; i < scores.length; i++) {
+			if(max < scores[i])
+				max = scores[i];
+			if(min > scores[i])
+				min = scores[i];
+		}
 	}
 }
 public class 실습_6_3정적메소드 {
@@ -113,6 +120,6 @@ public class 실습_6_3정적메소드 {
 		// 각 학생의 성적 테이블 출력
 		Student.printAllStudents(students);
 		// 과목별 최대/최소 점수 및 해당 학생 출력
-		Student.printSubjectStats(students);
+		//Student.printSubjectStats(students);
 		}
 	}
