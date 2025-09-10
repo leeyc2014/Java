@@ -7,7 +7,7 @@ public class StaticMethodTest {
 	public static void main(String[] args) {
 		StaticMethodTest.print1();
 		//StaticMethodTest.print2();//오류 - Static으로 선언한 클래스 메소드가 아니라 인스턴스 메소드 이므로 인스턴스 생성 후 호출해야 함
-		print1();	//같은 클래스 내에 선언되어 있으므로 생략
+		print1();	//같은 클래스 내에 선언되어 있으므로 생략 가능
 		//print2();//에러가 나는 이유를 알아야 한다(Static X)
 		StaticMethodTest smt = new StaticMethodTest();
 		smt.print2(); // 인스턴스 생성 후 참조변수 사용해 호출 

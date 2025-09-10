@@ -22,7 +22,7 @@ package com.ruby.java.ch05객체;
         else if (length < 4900)		return "D-세그먼트 (중형차)";
         else if (length < 5100)		return "E-세그먼트 (대형차)";
         else if (length >= 5100)	return "F-세그먼트 (초대형차)";
-		return "";
+		return getSegment();
     }
         // 과속 여부 판단 메소드
     void checkSpeeding(int speedLimit) {

@@ -14,7 +14,7 @@ public class 실습_5_3_배열필드 {
 //	     * count 필드를 사용하여 수강 과목 증가시마다 ++count
 	
 	    // 필드
-		for(int i = 0; i < subjects.length; i++) {
+		
 			
 		}
 	}
@@ -27,8 +27,9 @@ public class 실습_5_3_배열필드 {
 	        // 교육과목 및 수강 연도 출력
 	    	System.out.print("
 	    	// while 문을 사용하여 교육과목과 수강연도를 출력
-	    	 
-	    }
+	    	while(count++) {
+	    		System.out.print("
+	    	}
 	    void addSubjectYear(String subject, int year) {
 	    	//과목, 수강연도를 매개변수로 전달받아 배열에 추가
 	    }
