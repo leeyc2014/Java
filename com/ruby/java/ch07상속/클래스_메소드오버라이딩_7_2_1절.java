@@ -1,6 +1,6 @@
 package com.ruby.java.ch07상속;
-
-/* class Person {
+/*
+class Person {
 	private String name;
 	private int age;
 	public String getName() {
@@ -107,4 +107,5 @@ public class 클래스_메소드오버라이딩_7_2_1절 {
 		System.out.println(s.toString());
 	}
 }
+
 */

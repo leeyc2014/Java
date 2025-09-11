@@ -131,8 +131,9 @@ public class 클래스상속_생성자_7_2_2절 {
 		Professor p = new Professor();
 		Student s = new Student();
 		/*
-		 * Employee e1 = new Employee("오정임",47, "입학처");//에러 발생 Professor p1 = new
-		 * Professor("김푸름",52,"빅데이터"); Student s1 = new Student("김유빈",20,"컴퓨터");
+		 * Employee e1 = new Employee("오정임",47, "입학처");//에러 발생 
+		 * Professor p1 = new Professor("김푸름",52,"빅데이터"); 
+		 * Student s1 = new Student("김유빈",20,"컴퓨터");
 		 */
 		e.setName("오정임");
 		e.setAge(47);
