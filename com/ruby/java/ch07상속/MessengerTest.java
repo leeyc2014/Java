@@ -5,9 +5,9 @@ package com.ruby.java.ch07상속;
  *  2) 인터페이스는 클래스가 반드시 구현해야 할 기능들을 명세하는 역할
  *  3) 다중 상속이 필요한 상황에서 여러 인터페이스를 구현하여 상속 처리
  */
-interface Messenger {
+interface Messenger {//인터페이스에서는 고정 상수와 추상 클래스만 사용 가능(public static final, abstract)
 	int MIN_SIZE = 1;//컴파일러가 public static final int로 자동 변환
-	public static final int MAX_SIZE = 999999;
+	public static final int MAX_SIZE = 999999;//고정 상수
 	
 	public String getMessage();//컴파일러가 public abstract를 자동 추가
 	public abstract void setMessage(String msg);
@@ -23,7 +23,7 @@ interface Messenger {
 	public static void getConnection() {//클래스의 static 메소드와 같다
 		System.out.println("네트워크 연결");
 	}
-	static void log() {//public, abstract, default, static 만 가능
+	static void log() {//public, abstract, default, static 가능(private도 가능)
 		System.out.println("start job!");
 	}
 }
@@ -55,7 +55,7 @@ class Visualize{
 		System.out.println("데이터를 색상/농도로 시각화");
 	}
 }
-class GalaxyMessenger2 implements Messenger, WorkFile {
+class GalaxyMessenger2 implements Messenger, WorkFile {//인터페이스는 중복해서 구현 가능
 	public String getMessage() {
 		return "galaxy";
 	}
@@ -69,7 +69,7 @@ class GalaxyMessenger2 implements Messenger, WorkFile {
 		System.out.println("file을 download");
 	}
 }
-class GalaxyMessenger3 extends Visualize implements Messenger, WorkFile {
+class GalaxyMessenger3 extends Visualize implements Messenger, WorkFile {//클래스 확장 인터페이스 구현 동시 가능
 	public String getMessage() {
 		return "galaxy";
 	}
