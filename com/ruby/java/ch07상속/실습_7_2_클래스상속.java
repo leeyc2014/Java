@@ -83,7 +83,7 @@ abstract class Customer2 {
 	
 	@Override
 	public String toString() {
-		return "이름:" + name + ", 도시:" + city + ", 나이:" + age;
+		return "이름 : " + name + ", 도시 : " + city + ", 나이 : " + age;
 	}
 
 	abstract double getDiscountRate();
@@ -101,8 +101,7 @@ class RegularCustomer extends Customer2 {
 	@Override
 	double applyDiscount(double totalAmount) {
 		// 일반 고객 할인 적용
-		totalAmount = totalAmount * REGULARDISCOUNT_RATE;
-		return totalAmount;
+		return totalAmount * REGULARDISCOUNT_RATE;
 	}
 
 	@Override
@@ -120,8 +119,7 @@ class PremiumCustomer extends Customer2 {
 	}
 	@Override
 	double applyDiscount(double totalAmount) {
-		totalAmount = totalAmount * PREMIUMDISCOUNT_RATE;
-		return totalAmount;
+		return totalAmount * PREMIUMDISCOUNT_RATE;
 	}
 
 	@Override
@@ -136,8 +134,6 @@ class Order2 {
 	private Item2[] items;
 	private int[] quantities;
 	private int itemCount;
-	PremiumCustomer pre = new PremiumCustomer(null, null, 0);
-	RegularCustomer reg = new RegularCustomer(null, null, 0);
 
 	// 생성자
 	public Order2(Customer2 customer, int size) {
@@ -162,12 +158,7 @@ class Order2 {
 	}
 
 	private double calculateDiscountedTotal() {
-		double total = 0.0;
-		for (int i = 0; i < itemCount; i++) {
-			total += ((items[i].getPrice() * quantities[i]) - (items[i].getPrice() * quantities[i] * pre.applyDiscount(total)));
-			total += ((items[i].getPrice() * quantities[i]) - (items[i].getPrice() * quantities[i] * reg.applyDiscount(total)));
-		}
-		return total;
+		return calculateTotal() - customer.applyDiscount(calculateTotal());
 	}
 
 	public void printOrderSummary() {
@@ -181,7 +172,7 @@ class Order2 {
 			System.out.print(", 개수 : " + quantities[i]);
 			System.out.println(" ==> 가격 : " + (items[i].getPrice() * quantities[i]));
 		}
-		System.out.println("총액 : " + calculateTotal() + ", 할인율 : " + 0.1 + ", 할인금액 : -" + 0.1 * calculateTotal());
+		System.out.println("총액 : " + calculateTotal() + ", 할인율 : " + customer.getDiscountRate() + ", 할인금액 : -" + customer.applyDiscount(calculateTotal()));
 		System.out.println("할인 후 총액 : " + calculateDiscountedTotal());
 		System.out.println("-".repeat(55));
 	}

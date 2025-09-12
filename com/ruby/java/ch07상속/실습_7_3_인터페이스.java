@@ -1,5 +1,4 @@
 package com.ruby.java.ch07상속;
-
 //Discountable 인터페이스 정의 -시즌 할인율 적용
 interface Discountable {
 	double getDiscountedPrice(double price);
@@ -11,7 +10,7 @@ class SeasonalDiscount implements Discountable {
 
 	// 생성자
 	public SeasonalDiscount() {
-		
+		seasonalDiscountRate = 0.01;
 	}
 	
 	// Getter
@@ -21,7 +20,8 @@ class SeasonalDiscount implements Discountable {
 	
 	@Override
 	public double getDiscountedPrice(double price) {
-		return 0.0;
+		price = price - (price * seasonalDiscountRate);
+		return price;
 	}
 }
 
@@ -49,10 +49,6 @@ abstract class Item3 {
 
 	public int getStockQuantity() {
 		return stockQuantity;
-	}
-
-	public void reduceStock(int quantity) {
-
 	}
 }
 
@@ -84,25 +80,41 @@ class Order3 extends SeasonalDiscount {
 	private Customer3 customer; // 고객명
 	private Item3[] items; // 주문 제품들
 	private int[] quantities; // 주문 제품 수량들
-	private String[] orderDates; // 주문일자들
+	//private String[] orderDates; // 주문일자들
 	private int count;
 
 	// 생성자
-	public Order3(Customer3 customer, double seasonalDiscountRate) {
+	public Order3(Customer3 customer) {
 		this.customer = customer;
-		
+		items = new Item3[N];
+		quantities = new int[N];
+		this.count = 0;
 	}
 	
 	public void addItem(Item3 item, int quantity, String date) {
-
+		items[count] = item;
+		quantities[count] = quantity;
+		count++;
 	}
 
 	private double calculateTotal() {
-		return 0.0;
+		double total = 0.0;
+		for (int i = 0; i < count; i++) {
+			total += (items[i].getPrice() * quantities[i]);
+		}
+		return total;
 	}
-
+		
 	public void printOrderSummary() {
-
+		System.out.println(customer.toString());
+		for(int i = 0; i < count; i++) {
+			System.out.print("제품명 : " + items[i].getName());
+			System.out.print(", 단가 : " + items[i].getPrice());
+			System.out.print(", 수량 : " + quantities[i]);
+			System.out.println( ", 가격 : " + (items[i].getPrice() * quantities[i]));	
+		}
+		System.out.println("구매총액 : " + calculateTotal());
+		System.out.println("=".repeat(55));		
 	}
 
 	// 할인된 내역을 출력하는 메소드
@@ -110,6 +122,11 @@ class Order3 extends SeasonalDiscount {
 		/*
 		 * 정가 - 시즌 할인 적용 - 고객 할인 적용 => 할인된 가격 * 수량 > 총 지불 금액
 		 */
+		System.out.println("할인율 : " + customer.getDiscountRate());
+		System.out.println("할인가격 : " + customer.applyDiscount(calculateTotal()));
+		System.out.println("시즌할인율 : " + getSeasonalDiscountRate());
+		System.out.println("시즌할인 : " + getDiscountedPrice(customer.applyDiscount(calculateTotal())));
+		System.out.println("-".repeat(55));	
 	}
 }
 
@@ -118,8 +135,8 @@ abstract class Customer3 {
 	private String name;
 
 	// 생성자
-	public Customer3() {
-
+	public Customer3(String name) {
+		this.name = name;
 	}
 
 	@Override
@@ -134,21 +151,21 @@ abstract class Customer3 {
 //RegularCustomer 클래스: Customer 클래스를 상속받음
 class RegularCustomer3 extends Customer3 {
 	static final double REGULARDISCOUNT_RATE = 0.03;
-
+	
 	// 생성자
 	public RegularCustomer3(String name) {
-		
+		super(name);
 	}
 
 	@Override
 	double applyDiscount(double totalAmount) {
 		// 일반 고객은 추가 할인 없음
-		return 0.0;
+		return totalAmount - (totalAmount * REGULARDISCOUNT_RATE);
 	}
 	
 	@Override
 	double getDiscountRate() {
-		return 0.0;
+		return REGULARDISCOUNT_RATE;
 	}
 }
 
@@ -158,16 +175,16 @@ class PremiumCustomer3 extends Customer3 {
 
 	// 생성자
 	public PremiumCustomer3(String name) {
-	
+		super(name);
 	}
 	@Override
 	double applyDiscount(double totalAmount) {
-		return 0.0;
+		return totalAmount - (totalAmount * PREMIUMDISCOUNT_RATE);
 	}
 	
 	@Override
 	double getDiscountRate() {
-		return 0.0;
+		return PREMIUMDISCOUNT_RATE;
 	}
 }
 
@@ -183,8 +200,8 @@ public class 실습_7_3_인터페이스 {
 		Customer3 premiumCustomer = new PremiumCustomer3("강감찬");
 
 		// 주문 생성 및 계산 (RegularCustomer)
-		double seasonalDiscountRate = 0.01;
-		Order3 regularOrder = new Order3(regularCustomer, seasonalDiscountRate);
+		//double seasonalDiscountRate = 0.01;
+		Order3 regularOrder = new Order3(regularCustomer);
 		regularOrder.addItem(note, 1, "240901");
 		regularOrder.addItem(clothe, 2, "240902");
 
@@ -192,7 +209,7 @@ public class 실습_7_3_인터페이스 {
 		regularOrder.printDiscountDetails(); // 할인된 내역 출력
 
 		// 주문 생성 및 계산 (PremiumCustomer)
-		Order3 premiumOrder = new Order3(premiumCustomer, seasonalDiscountRate);
+		Order3 premiumOrder = new Order3(premiumCustomer);
 		premiumOrder.addItem(note, 1, "240901");
 		premiumOrder.addItem(clothe, 2, "240903");
 

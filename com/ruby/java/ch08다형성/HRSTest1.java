@@ -1,4 +1,4 @@
-package com.ruby.java.ch08polymorphism;
+package com.ruby.java.ch08다형성;
 //추상 클래스의 생성자 정의
 
 abstract class Employee extends Object {//추상 클래스는 필드가 존재, 인터페이스는 필드 X(둘은 비슷한 역할을 함)

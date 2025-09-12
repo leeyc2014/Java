@@ -1,4 +1,4 @@
-package com.ruby.java.ch08polymorphism;
+package com.ruby.java.ch08다형성;
 
 interface Shape {
 	public double perimeter();

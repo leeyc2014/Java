@@ -67,10 +67,6 @@ class Student {
 
 	// 통과 여부 (모든 과목을 통과했는지 확인)
 	public boolean isPassed() {
-		for(int i = 1; i <= scores.length; i++) {
-			if(scores[i-1] < passFails[i-1]) return true;
-			else return false;
-		}
 		//주어진 학생이 모든 과목 통여 여부를 반환
 		return true;
 	}
