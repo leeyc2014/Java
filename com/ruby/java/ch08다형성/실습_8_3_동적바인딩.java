@@ -34,7 +34,7 @@ abstract class Item {
 	
 	// 재고 감소 메소드
 	public void reduceStock(int quantity) {
-		
+		stockQuantity -= quantity;
 	}
 
 	public abstract void show();
@@ -113,21 +113,26 @@ class Order extends SeasonalDiscount {
 		orderDates = new String[N];
 	}
 	
-	public void addItem(Item item, int quantity, String date) {
-		
+	public void addItem(Item item, int quantity, String date) {	
 		// 최대 주문 item 개수를 넘어서는지 확인
-		// item에 재고가 있는지 확인		
-		// 재고가 있으면 아이템 추가
-		if(quantity < N) {
-			for(int i = 0; i < count; i++) {
-				if(items[i].getStockQuantity() > 0) {
-					items[count] = item;
-					quantities[count] = quantity;
-					orderDates[count] = date;
-					count++;
-				}
+		for(int i = 0; i < count; i++) {
+			if(count >= N) {
+				System.out.println("최대 주문 개수 초과");
+				return;
 			}
 		}
+		// item에 재고가 있는지 확인
+		if(quantity > item.getStockQuantity()) {
+			System.out.println("재고 부족");
+			return;
+		}
+		// 재고가 있으면 아이템 추가
+		items[count] = item;
+		quantities[count] = quantity;
+		orderDates[count] = date;
+		count++;
+		
+		item.reduceStock(quantity);
 	}
 
 	private double calculateTotal() {
@@ -145,11 +150,11 @@ class Order extends SeasonalDiscount {
 		/*
 		 * 할인을 적용한 비용 계산
 		 */
-		double discountedtotal = 0.0;
+		double discountedTotal = 0.0;
 		for(int i = 0; i < count; i++) {
-			discountedtotal += (getDiscountedPrice(calculateTotal()) * quantities[i]);
+			discountedTotal += (getDiscountedPrice(calculateTotal()) * quantities[i]);
 		}
-		return discountedtotal;
+		return discountedTotal;
 	}
 	
 	// 주문 내역을 출력하는 메소드
@@ -172,9 +177,9 @@ class Order extends SeasonalDiscount {
 		 */
 		for(int i = 0; i < count; i++) {
 			System.out.print("제품명 : " + items[i].getName());
-			System.out.print(", 할인 : " + getDiscountedPrice(calculateTotal()));
+			System.out.print(", 할인 : " + getDiscountedPrice(items[i].getPrice()));
 			System.out.print(", 개수 : " + quantities[i]);
-			System.out.print(", 가격 : " + getDiscountedPrice(calculateTotal()) * quantities[i]);
+			System.out.print(", 가격 : " + getDiscountedPrice(items[i].getPrice()) * quantities[i]);
 			System.out.println(", 주문일 : " + orderDates[i]);
 		}
 		System.out.println("총액 : " + calculateDiscountTotal());
