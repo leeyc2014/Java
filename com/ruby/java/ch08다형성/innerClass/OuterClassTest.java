@@ -1,4 +1,4 @@
-package com.ruby.java.ch08polymorphism.innerClass;
+package com.ruby.java.ch08다형성.innerClass;
 /*
  * 368페이지 8.2.2 내부 클래스 종류 > 마지막 문단 설명
  */

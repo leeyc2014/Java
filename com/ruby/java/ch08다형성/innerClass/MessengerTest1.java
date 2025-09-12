@@ -1,11 +1,11 @@
-package com.ruby.java.ch08polymorphism.innerClass;
+package com.ruby.java.ch08다형성.innerClass;
 /*
  * 익명 클래스 구현 실습 
  */
 
 interface Messenger {
-	String getMessage();
-	void setMessage(String msg );
+	String getMessage(); // 추상 메소드
+	void setMessage(String msg);
 }
 class GMessenger implements Messenger {
 	@Override
@@ -38,7 +38,7 @@ public class MessengerTest1 {
 				System.out.println("익명클래스 메시지: " + msg);
 			}
 		};
-		System.out.println("익명:: " + test.getMessage());
+		System.out.println("익명 : " + test.getMessage());
 		test.setMessage("nice");
 	}
 

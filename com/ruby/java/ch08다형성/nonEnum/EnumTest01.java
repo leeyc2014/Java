@@ -1,5 +1,4 @@
-
-package com.ruby.java.ch08polymorphism.nonEnum;
+package com.ruby.java.ch08다형성.nonEnum;
 
 enum Status {
 	READY, SEND, COMPLETE, CLOSE

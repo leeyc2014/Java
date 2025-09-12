@@ -1,4 +1,4 @@
-package com.ruby.java.ch08polymorphism.nonEnum;
+package com.ruby.java.ch08다형성.nonEnum;
 /*
  * enum 클래스에 대하여 아래 코드를 학습하는 것이 중요하다
  * 자료구조 코딩을 위해 사전 학습으로 꼭 필요
@@ -9,8 +9,17 @@ import java.util.Scanner;
 //자료구조시에 사용
 enum Mandarin {
 	금귤(600), 한라봉(500), 레드향(300), 천혜향(400), 황금향(800);//Mandarin 클래스의 객체들
+	//enum의 각 상수(예: 금귤, 한라봉)는 사실 해당 enum 클래스의 public static final 객체 인스턴스
 /*
  *     // enum 상수 → 정적(static) 상수(final 객체) > 싱글턴/singleton 객체라 한다 
+ *     싱글턴 패턴은 소프트웨어 디자인 패턴 중 하나로, 특정 클래스의 인스턴스가 단 하나만 존재하도록 보장하고, 
+ *     그 유일한 인스턴스에 대한 전역적인 접근점을 제공하는 것을 목표
+ *     싱글턴 사용: 데이터베이스연결
+ *     
+ *     소프트웨어 디자인 패턴 > 생성패턴 > 싱글턴 + 팩토리 메소드 + 추상 팩토리 등
+ *           "           > 구조패턴 > 어댑터 + 데코레이터 + facade
+ *           "           > 행동패턴 > observer + strategy + template method
+ *           
     public static final Mandarin 금귤 = new Mandarin("금귤", 0, 600);
     public static final Mandarin 한라봉 = new Mandarin("한라봉", 1, 500);
     public static final Mandarin 레드향 = new Mandarin("레드향", 2, 300);
@@ -62,6 +71,7 @@ public class EnumTest02_실습소스 {
 		System.out.println("시작::");
 		Mandarin m;//생성자를 호출하지 않는다
 		//Mandarin m2 = new Mandarin(100);//생성자를 호출할 수 없다 - 주의점 
+		//enum은 미리 정의된, 고정된 개수의 인스턴스만을 가지도록 설계되었기 때문이다 
 		//*
 		/*
 		 * main() 메서드에서 enum 상수에 최초로 접근하는 시점에 생성자들이 호출.

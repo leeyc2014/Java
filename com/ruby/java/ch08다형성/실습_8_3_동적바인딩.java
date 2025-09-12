@@ -83,7 +83,7 @@ class SeasonalDiscount implements Discountable {
 
 	// 생성자
 	public SeasonalDiscount() {
-		seasonalDiscount = 0.0;
+		seasonalDiscount = 0.01;
 	}
 	
 	public SeasonalDiscount(double seasonalDiscount) {
@@ -92,7 +92,7 @@ class SeasonalDiscount implements Discountable {
 	
 	@Override
 	public double getDiscountedPrice(double price) {
-		return price * seasonalDiscount;
+		return price - (price * seasonalDiscount);
 	}
 }
 
@@ -152,7 +152,7 @@ class Order extends SeasonalDiscount {
 		 */
 		double discountedTotal = 0.0;
 		for(int i = 0; i < count; i++) {
-			discountedTotal += (getDiscountedPrice(calculateTotal()) * quantities[i]);
+			discountedTotal += (customer.getDiscountedPrice(super.getDiscountedPrice(items[i].getPrice()) * quantities[i]));
 		}
 		return discountedTotal;
 	}
@@ -177,9 +177,9 @@ class Order extends SeasonalDiscount {
 		 */
 		for(int i = 0; i < count; i++) {
 			System.out.print("제품명 : " + items[i].getName());
-			System.out.print(", 할인 : " + getDiscountedPrice(items[i].getPrice()));
+			System.out.print(", 할인 : " + customer.getDiscountedPrice(super.getDiscountedPrice(items[i].getPrice())));
 			System.out.print(", 개수 : " + quantities[i]);
-			System.out.print(", 가격 : " + getDiscountedPrice(items[i].getPrice()) * quantities[i]);
+			System.out.print(", 가격 : " + customer.getDiscountedPrice(super.getDiscountedPrice(items[i].getPrice())) * quantities[i]);
 			System.out.println(", 주문일 : " + orderDates[i]);
 		}
 		System.out.println("총액 : " + calculateDiscountTotal());

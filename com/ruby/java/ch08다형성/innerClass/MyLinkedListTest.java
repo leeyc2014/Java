@@ -1,10 +1,12 @@
-package com.ruby.java.ch08polymorphism.innerClass;
+package com.ruby.java.ch08다형성.innerClass;
 /*
  *  inner class: 359페이지 밑에서 두번째, 마지막 문단 이해
  */
 class MyLinkedList {
 	private Node head=null;
-	
+	public MyLinkedList() {
+		
+	}
 	private class Node {
 		private String data;
 		private Node link;
@@ -78,7 +80,7 @@ public class MyLinkedListTest {
 		myList.delete("177");
 		System.out.println("삭제후 출력: ");
 		myList.print();
-		//MyLinkedList.Node nd = myList.new Node("Hong");//not visible
+		//MyLinkedList.Node nd = myList.new Node("Hong");//not visible(private 해제)
 		//nd.data = "hello";
 	}
 }
