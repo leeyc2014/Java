@@ -68,26 +68,49 @@ class Student {
 	// 통과 여부 (모든 과목을 통과했는지 확인)
 	public boolean isPassed() {
 		//주어진 학생이 모든 과목 통여 여부를 반환
+		for(int i = 1; i < scores.length; i++) {
+			if(scores[i - 1] < passFails[i - 1])
+				return false;
+		}
 		return true;
 	}
 
 	// 6.2.2 각 학생의 성적 테이블을 출력하는 정적 메소드
 	public static void printAllStudents(Student[] students) {
 		//학생 이름 + 과목명, 과목 점수 .... + 과목통과여부:pass or fail
-
+		for(Student s : students) {
+			System.out.println("이름 = " + s.name + ", 나이 = " + s.age);
+			for(int i = 1; i <= s.subjects.length; i++) {			
+				String result = (s.isPassed()) ? "Pass" : "Fail";
+				System.out.println("과목" + i + " = " + s.subjects[i - 1] + ", 점수" + i + " = " + s.scores[i - 1] + ", 통과기준 = " + s.passFails[i - 1] + " -> " + result);
+			}
+			System.out.println();
+		}
 	}
 	
 	// 6.2.2 과목별 최대/최소 점수 및 해당 학생을 출력하는 정적 메소드
-	public void printSubjectStats(Student[] students) {
-		int max = scores[0];
-		int min = scores[0];
-		for(int i = 1; i < scores.length; i++) {
-			if(max < scores[i])
-				max = scores[i];
-			if(min > scores[i])
-				min = scores[i];
+	/*public static void printSubjectStats(Student[] students) {
+		for (int i = 0; i < subjects.length; i++) {
+			int max = 0;
+			int min = 101;
+			String maxSt = "";
+			String minSt = ""; 
+			for (Student s : students) {			
+				if (s.scores[i] > max) {
+					max = s.scores[i];
+					maxSt = s.name;
+				}
+				if (s.scores[i] < min) {
+					min = s.scores[i];
+					minSt = s.name;
+				}
+			}
+			System.out.println("과목 = " + s.subjects[i]);
+			System.out.println("최고 점수 = " + max, ", 학생 = " + maxSt);
+			System.out.println("최소 점수 = " + min, ", 학생 = " + minSt);
+			System.out.println();
 		}
-	}
+	}*/
 }
 public class 실습_6_3정적메소드 {
 	static void showStudents(Student[] students) {
