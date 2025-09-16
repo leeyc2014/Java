@@ -21,11 +21,20 @@ class Student {
 	private String name;
 
 	// 생성자
-
+	public Student(int sid, String name) {
+		this.sid = sid;
+		this.name = name;
+	}
 	
-	// Getter
+	// Getter	
+	public int getSid() {
+		return sid;
+	}
 
-	
+	public String getName() {
+		return name;
+	}
+
 	@Override
 	public String toString() {
 		return "sid:" + sid + ", 이름:" + name;
@@ -38,8 +47,8 @@ class Student {
 class StudentComparator1 implements Comparator<Student> {
 	@Override
 	public int compare(Student s1, Student s2) {
-		// 구현
-		return 0;
+		// 구현		
+		return s1.getName().compareTo(s2.getName());
 	}
 }
 
@@ -50,7 +59,9 @@ class StudentComparator2 implements Comparator<Student> {
 	@Override
 	public int compare(Student s1, Student s2) {
 		// 구현
-		return 0;
+		if(s1.getSid() < s2.getSid())	return -1;
+		else if(s1.getSid() > s2.getSid())	return 1;
+		else return 0;
 	}
 }
 public class 실습_10_3_ArrayList정렬 {
@@ -58,7 +69,7 @@ public class 실습_10_3_ArrayList정렬 {
 	private static Random random = new Random();
 	
 	public static void main(String[] args) {
-/*
+
 		System.out.println("1. 정수 배열의 정렬");
 		System.out.println("-".repeat(40));
 		int data[] = new int[10];
@@ -132,6 +143,6 @@ public class 실습_10_3_ArrayList정렬 {
 		System.out.println();
 		for (Student s : blist)
 			System.out.println(s);
-*/			
+			
 	}
 }

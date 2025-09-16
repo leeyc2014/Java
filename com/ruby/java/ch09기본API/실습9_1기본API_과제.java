@@ -59,13 +59,22 @@ class Library {
 	static final int CAPACITY = 20;
 	private Book[] books; 
 	private int top;
-	ArrayList<String> list = new ArrayList<>();
+	
+	public Library() {
+		books = new Book[CAPACITY];
+		top = 0;
+	}
 
 	public boolean addBook(Book book) {
-		
+		if(top >= CAPACITY) 	return false;
+		books[top++] = book;
+		return true;
 	}
 	public void printBooks(String msg) {
-		System.out.println();
+		System.out.println(msg);
+		for(int i = 0; i < top; i++) {
+			System.out.println(books[i]);
+		}
 	}
 	public void sortBooksByTitle(){
 		//String의 compareTo() 사용
@@ -76,7 +85,11 @@ class Library {
 		Arrays.sort(books, 0, top, (b1, b2) -> Integer.parseInt(b1.getIsbn()) - Integer.parseInt(b2.getIsbn()));//9.3.3 Arrays 클래스
 	}
 	public Book searchBookByTitle(String title) {
-		if()
+		for(int i = 0; i < top; i++) {
+			if(books[i].getTitle().equals(title)) {
+				return books[i];
+			}
+		}return null;
 	}
 }
 

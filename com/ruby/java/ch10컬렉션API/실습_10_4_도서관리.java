@@ -23,6 +23,7 @@ class Book implements Comparable<Book>{
 	public String getTitle() {
 		return title;
 	}
+	
 	public String getIsbn() {
 		return isbn;
 	}
@@ -36,46 +37,61 @@ class Book implements Comparable<Book>{
 	@Override
 	public int compareTo(Book o) {
 		// 구현
-		return 0;
+		return title.compareTo(o.title);
 	}
 }
 
 class Library {
 	static final int CAPACITY = 5; // 기본 용량을 5로 설정
-	private ArrayList<Book> books = new ArrayList<>();;
+	private ArrayList<Book> books = new ArrayList<>();
 
 	// 책 추가 (용량 초과 시 에러메시지 출력)
 	public void addBook(Book book) {
 		// 구현
-		
+		if(books.size() > CAPACITY)	return ;
+		books.add(book);
 	}
 
 	// 책 삭제 (빈 목록에서 삭제 시 에러메시지 출력)
 	public Book removeBook() {
 		// 구현
-		return null;
+		if(books.size() == 0)	return null;
+		return books.removeFirst();
 	}
 
 	// 메시지와 함께 library에 저장된 도서 출력
 	public void printBooks(String msg) {
 		// 구현
-
+		System.out.println(msg);	 
+			if(books.size() == 0)	return ;
+			else {	
+				Object obj[] = books.toArray();
+				for(int i = 0; i < obj.length; i++) {
+					System.out.println(obj[i]);
+				}
+			}
 		System.out.println("-".repeat(60));
 	}
 
 	// 제목으로 정렬
 	public void sortBooksByTitle() {
 		// 구현
+		Collections.sort(books);
 	}
 
 	// ISBN으로 정렬
 	public void sortBooksByISBN() {
 		// 구현
+		Collections.sort(books, (b1, b2)->b1.getIsbn().compareTo(b2.getIsbn()));
 	}
 
 	// books에서 title을 검색해서 리턴, 없으면 null 리턴
 	public Book searchBookByTitle(String title) {
 		// 구현
+		Object obj[] = books.toArray();
+		for(int i = 0; i < obj.length; i++) {
+			if(((Book) obj[i]).getTitle().compareTo(title) == 0)	return ((Book) obj[i]); 
+		}
 		return null;
 	}
 }

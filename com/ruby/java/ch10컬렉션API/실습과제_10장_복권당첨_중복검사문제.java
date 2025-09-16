@@ -53,8 +53,10 @@ public class 실습과제_10장_복권당첨_중복검사문제 {
 		 *  [32, 6, 23, 24, 10, 27, 43]]
 		 */
 		for (int i = 0; i < n; i++) {
-
-			
+			lotto = new HashSet<Integer>();
+			for(int j = 0; j < lotto.size(); j++) {
+				lotto.add(number.nextInt(45) + 1);
+			}		
 		}
 		System.out.println("\nlot hashset을 출력\n");
 		for (HashSet<Integer> eachLotto : lot) {
@@ -77,7 +79,7 @@ public class 실습과제_10장_복권당첨_중복검사문제 {
 		//당첨번호 추첨
 		HashSet<Integer> win = new HashSet<>();
 		for (int j = 0; win.size() < 7; j++) {//6개 번호와 보너스 번호
-
+			
 		}
 		System.out.print("당첨번호: " + win);//6개의 당첨번호와 보너스번호
 		// 6개를 맞힌 복권을 찾는다 
@@ -113,7 +115,7 @@ public class 실습과제_10장_복권당첨_중복검사문제 {
 	static void winnerLotto(HashSet<Integer> w,List<List<Integer>> al ) {
 		// 당첨번호 w에 대하여 발행된 복권 리스트 al의 모든 원소 elem에 대하여 조사한다
 		for (int i = 0; i < al.size(); i++) {
-
+			
 		}
 	}
 	static void checkWinner(HashSet<Integer> w,List<Integer> elem) {
