@@ -3,6 +3,7 @@ package com.ruby.java.ch10컬렉션API;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Random;
@@ -22,8 +23,17 @@ class Lotto1 {
 	
 	// 생성자에서 1~45 사이의 정수를 임의로 선택해서 lotto에 중복되지 않게 저장
 	// 마지막 보너스 번호도 1개 lotto에 저장된 숫자들과 중복되지 않게 저장
-	Random rd = new Random();
-	
+	public Lotto1() {
+		Random rd = new Random();
+		lotto = new HashSet<Integer>();
+		for(int i = 0; lotto.size() < 6; i++) {
+			lotto.add(rd.nextInt(45)+1);
+		}
+		while(true) {
+			bonus = rd.nextInt(45) + 1;
+			if(!lotto.contains(bonus)) break;
+		}
+	}
 
 	// Getter
 	public Set<Integer> getLotto() {
@@ -54,7 +64,7 @@ class Lotto1 {
 public class 실습_10_2_lotto당첨 {
 
 	// Lotto 구매 횟수
-	private static final int NUMBEROFLOTTO = 1000;
+	private static final int NUMBEROFLOTTO = 100;
 	
 	// 구매한 Lotto 화면에 출력 여부
 	private static final boolean PRINTLOTTO = true;
@@ -62,7 +72,13 @@ public class 실습_10_2_lotto당첨 {
 	// lottWin과 lotto를 비교해서 당첨여부를 확인
 	// 맞춘 번호 개수를 리턴하면 된다.
 	private static int hitTest(Lotto1 lottoWin, Lotto1 lotto) {
-		return 0;
+		Set<Integer> setWin = lottoWin.getLotto();
+		Set<Integer> set = lotto.getLotto();
+		int hit = 0;
+		for(Integer n : set) {
+			if (setWin.contains(n)) hit++;
+		}
+		return hit;
 	}
 	
 	// 숫자를 ","가 있는 문자열로 변환

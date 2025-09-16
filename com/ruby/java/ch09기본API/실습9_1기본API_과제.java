@@ -1,5 +1,6 @@
 package com.ruby.java.ch09기본API;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /*
@@ -15,12 +16,35 @@ Book 클래스를 작성하고 도서 정보를 담는 객체를 생성하세요
 Library 클래스를 작성해 ArrayList를 사용하여 도서를 관리하고, 도서 목록을 출력하세요.
 */
 // Book 클래스
-/*
+
 class Book {
 	private String title;
 	private String author;
 	private int publicationYear;
 	private String isbn;
+	
+	public Book(String title, String author, int publicationYear, String isbn) {
+		this.title = title;
+		this.author = author;
+		this.publicationYear = publicationYear;
+		this.isbn = isbn;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public int getPublicationYear() {
+		return publicationYear;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
 
 	@Override
 	public String toString() {
@@ -35,12 +59,13 @@ class Library {
 	static final int CAPACITY = 20;
 	private Book[] books; 
 	private int top;
+	ArrayList<String> list = new ArrayList<>();
 
 	public boolean addBook(Book book) {
-
+		
 	}
 	public void printBooks(String msg) {
-
+		System.out.println();
 	}
 	public void sortBooksByTitle(){
 		//String의 compareTo() 사용
@@ -48,14 +73,14 @@ class Library {
 	}
 	public void sortBooksByISBN(){
 		//String의 compareTo() 사용
-		Arrays.sort(books, 0, top, (b1, b2) -> Integer.parseInt(b1.getISBN()) - Integer.parseInt(b2.getISBN()));//9.3.3 Arrays 클래스
+		Arrays.sort(books, 0, top, (b1, b2) -> Integer.parseInt(b1.getIsbn()) - Integer.parseInt(b2.getIsbn()));//9.3.3 Arrays 클래스
 	}
 	public Book searchBookByTitle(String title) {
-
+		if()
 	}
 }
 
-public class 실습_C1_9장 {
+public class 실습9_1기본API_과제 {
 	public static void main(String[] args) {
 		Library library = new Library(); 
 		
@@ -93,4 +118,3 @@ public class 실습_C1_9장 {
 			System.out.println("\n도서명으로 검색한 도서" + foundBook.toString());
 	}
 }
-*/
