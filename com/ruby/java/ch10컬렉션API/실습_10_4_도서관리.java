@@ -48,14 +48,18 @@ class Library {
 	// 책 추가 (용량 초과 시 에러메시지 출력)
 	public void addBook(Book book) {
 		// 구현
-		if(books.size() > CAPACITY)	return ;
+		if(books.size() >= CAPACITY) {
+			System.out.println("용량 초과");
+		}
 		books.add(book);
 	}
 
 	// 책 삭제 (빈 목록에서 삭제 시 에러메시지 출력)
 	public Book removeBook() {
 		// 구현
-		if(books.size() == 0)	return null;
+		if(books.size() == 0)	{
+			System.out.println("빈 목록");
+		}
 		return books.removeFirst();
 	}
 
@@ -137,6 +141,6 @@ public class 실습_10_4_도서관리 {
 		// 도서 목록 출력
 		library.printBooks("현재 도서 목록:");
 		
-		library.removeBook();
+		//library.removeBook();
 	}
 }

@@ -79,7 +79,7 @@ public class 실습과제_10장_복권당첨_중복검사문제 {
 		//당첨번호 추첨
 		HashSet<Integer> win = new HashSet<>();
 		for (int j = 0; win.size() < 7; j++) {//6개 번호와 보너스 번호
-			
+			win.add(number.nextInt(45) + 1);
 		}
 		System.out.print("당첨번호: " + win);//6개의 당첨번호와 보너스번호
 		// 6개를 맞힌 복권을 찾는다 
@@ -95,9 +95,7 @@ public class 실습과제_10장_복권당첨_중복검사문제 {
 		    for (List<Integer> d : dupList) {
 		        System.out.println(d);
 		    }
-		}
-
-		
+		}	
 	}
 	/*
 	발행된 복권에 중복 복권 조사하는 함수 구현
