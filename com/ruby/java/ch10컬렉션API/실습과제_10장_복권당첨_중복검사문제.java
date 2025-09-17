@@ -64,6 +64,7 @@ public class 실습과제_10장_복권당첨_중복검사문제 {
 			 * 33  1 17 22  6  8  + 보너스번호: 12
 			 *  0  1 18 38  6 24  + 보너스번호: 29
 			 */
+			System.out.println();
 			int count = 0;
 			for (Integer each : eachLotto) {
 				
