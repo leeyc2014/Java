@@ -10,7 +10,36 @@ public class train_실습1_6_스트링토큰_과제 {
  */
   
 	public static String[] extractSortStrings(String msg) {
-		String result[] = 
+		StringTokenizer st = new StringTokenizer(msg);
+		int count = st.countTokens();
+		String[] result = new String[count];
+		for(int i = 0; i < count; i++) {
+			result[i] = st.nextToken();
+		}
+		Arrays.sort(result);
+		return result;
+	}
+	
+	public static void printStringArray(String[] s) {
+		for(int i = 0; i < s.length; i++) {
+			System.out.print(s[i] + " ");
+		}
+		System.out.println();
+	}
+	
+	public static double[] convertSortToDouble(String[] in) {
+		double[] s = new double[in.length];
+		for(int i = 0; i < in.length; i++) {
+			s[i] = Double.parseDouble(in[i]);		
+		}
+		Arrays.sort(s);
+		return s;
+	}
+	
+	public static void printDoubleArray(double[] s) {
+		for(int i = 0; i < s.length; i++) {
+			System.out.print(s[i] + " ");
+		}
 	}
   
     public static void main(String[] args) {

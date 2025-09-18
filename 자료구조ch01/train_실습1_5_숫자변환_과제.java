@@ -14,9 +14,9 @@ public class train_실습1_5_숫자변환_과제 {
 	}
 	
 	public static void printStringArray(String[] s) {
-		for(String st : s) {
-			System.out.print(st + " ");
-		}
+		for(int i = 0; i < s.length; i++) {
+    		System.out.print(s[i] + " ");
+    	}
 		System.out.println();
 	}
 	
@@ -30,9 +30,9 @@ public class train_실습1_5_숫자변환_과제 {
 	}
 	
 	public static void printIntArray(int[] s) {
-		for(int st : s) {
-			System.out.print(st + " ");
-		}
+		for(int i = 0; i < s.length; i++) {
+    		System.out.print(s[i] + " ");
+    	}
 	}
 	
     public static void main(String[] args) {

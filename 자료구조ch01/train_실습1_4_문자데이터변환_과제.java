@@ -25,9 +25,9 @@ public class train_실습1_4_문자데이터변환_과제 {
 
 	// 배열을 출력하는 함수
 	public static void showAllString(String[] array) {
-		for(String s : array) {
-			System.out.print(s + "  ");
-		}
+		for(int i = 0; i < array.length; i++) {
+    		System.out.print(array[i] + " ");
+    	}
 	}
 
 	public static void main(String[] args) {

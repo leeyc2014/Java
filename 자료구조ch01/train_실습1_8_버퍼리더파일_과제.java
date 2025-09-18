@@ -49,7 +49,28 @@ public class train_실습1_8_버퍼리더파일_과제 {
             return new String[0];  // 오류 발생 시 빈 배열 반환
         }
     }
-
+    
+    public static void printStringArray(String[] s) {
+    	for(int i = 0; i < s.length; i++) {
+    		System.out.print(s[i] + " ");
+    	}
+    	System.out.println();
+    }
+    
+    public static int[] convertSortToInt(String[] s) {
+    	int[] in = new int[s.length];
+    	for(int i = 0; i < s.length; i++) {
+    		in[i] = Integer.parseInt(s[i]);
+    	}
+    	Arrays.sort(in);
+    	return in;
+    }
+    
+    public static void printIntArray(int[] s) {
+    	for(int i = 0; i < s.length; i++) {
+    		System.out.print(s[i] + " ");
+    	}
+    }
     public static void main(String[] args) {
         String filename = "data2.txt";  // 파일 이름 설정 (실제 파일 경로로 변경)
 

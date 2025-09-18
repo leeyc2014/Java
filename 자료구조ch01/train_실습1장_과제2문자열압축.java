@@ -17,4 +17,29 @@ public class train_실습1장_과제2문자열압축 {
         String input = "aabcccccaaa";
         System.out.println("압축 결과: " + compress(input));
     }
+    
+    private static String compress(String input) {
+    	if(input == null || input.isEmpty()) {
+    		return input;
+    	}
+    	StringBuilder compressed = new StringBuilder();
+    	int count = 0;
+    	/*for(int i = 0; i < input.length(); i++) {
+    		count++;
+    		if(i + 1 >= input.length() || input.charAt(i) != input.charAt(i + 1)) {
+    			compressed.append(String.format("%c%d", input.charAt(i), count));
+    			count = 0;
+    		}
+    	}*/
+    	for(int i = 0; i < input.length(); i++) {
+    		count++;
+    		if(input.length() < i) {
+    			if(input.charAt(i) == input.charAt(i + 1)) {   				
+    				compressed.append(String.format("%c%d", input.charAt(i), count));
+        			count = 0;
+    			}
+    		}
+    	}
+    	return input;
+    }
 }

@@ -46,6 +46,28 @@ public class train_실습1_7_파일데이터_과제 {
         Arrays.sort(stringArray);
         return stringArray;  // 정렬된 배열 반환
     }
+    
+    public static void printStringArray(String[] s) {
+    	for(int i = 0; i < s.length; i++) {
+    		System.out.print(s[i] + " ");
+    	}
+    	System.out.println();
+    }
+    
+    public static int[] convertSortToInt(String[] in) {
+    	int[] s = new int[in.length];
+    	for(int i = 0; i < in.length; i++) {
+    		s[i] = Integer.parseInt(in[i]);
+    	}
+    	Arrays.sort(s);
+    	return s;
+    }
+    
+    public static void printIntArray(int[] s) {
+    	for(int i = 0; i < s.length; i++) {
+    		System.out.print(s[i] + " ");
+    	}
+    }
 
     public static void main(String[] args) {
         String filename = "data.txt";  // 파일 이름 설정 (실제 파일 경로로 변경)

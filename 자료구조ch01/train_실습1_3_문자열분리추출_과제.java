@@ -17,9 +17,9 @@ public class train_실습1_3_문자열분리추출_과제 {
     // 문자열을 comma로 분리하여 배열로 저장하고 정렬하는 함수
     public static String[] splitAndSort(String baseString) {
     	String[] result = baseString.split(",");
-    	for(String st : result) {
-    		st.trim();
-    	}
+    	for(int i = 0; i < result.length; i++) {
+    		result[i] = result[i].trim();
+    	}  	
     	Arrays.sort(result);
     	return result;
     }
@@ -27,8 +27,8 @@ public class train_실습1_3_문자열분리추출_과제 {
     // 배열에서 특정 문자열을 찾는 함수 (있으면 true, 없으면 false 반환)
     public static int findAllString(String[] array, String target) {
     	int count = 0;
-    	for(String st : array) {
-    		if(st.equals(target))
+    	for(int i = 0; i < array.length; i++) {
+    		if(array[i].equals(target))
     		count++;
     	}
     	return count;
