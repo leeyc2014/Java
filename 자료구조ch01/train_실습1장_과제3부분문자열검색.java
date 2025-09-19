@@ -10,10 +10,16 @@ package 자료구조ch01;
  */
 public class train_실습1장_과제3부분문자열검색 {
 	private static void searchSubstring(String text, String pattern) {
-		int pos = text.indexOf(pattern);
-		System.out.print("[" + pos);
-		pos = text.indexOf(pattern, pos + 1);
-		System.out.println(", " + pos + "]");
+		int idx = text.indexOf(pattern);
+		System.out.print("[");
+		while(idx != -1) {
+			System.out.print(idx);	
+			idx = text.indexOf(pattern, idx + 1);
+			if(idx != -1) {
+				System.out.print(", ");
+			}
+		}
+		System.out.println("]");
 	}
 	
 	public static void main(String[] args) {
