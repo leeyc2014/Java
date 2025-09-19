@@ -18,28 +18,24 @@ public class train_실습1장_과제2문자열압축 {
         System.out.println("압축 결과: " + compress(input));
     }
     
-    private static String compress(String input) {
-    	if(input == null || input.isEmpty()) {
-    		return input;
-    	}
-    	StringBuilder compressed = new StringBuilder();
-    	int count = 0;
-    	/*for(int i = 0; i < input.length(); i++) {
-    		count++;
-    		if(i + 1 >= input.length() || input.charAt(i) != input.charAt(i + 1)) {
-    			compressed.append(String.format("%c%d", input.charAt(i), count));
-    			count = 0;
-    		}
-    	}*/
-    	for(int i = 0; i < input.length(); i++) {
-    		count++;
-    		if(input.length() < i) {
+    private static StringBuilder compress(String input) {
+    	//if(input == null || input.isEmpty()) {
+    	//	return input;
+    	//}
+    	StringBuilder compressed = new StringBuilder(input);
+    	int count = 1;
+    	for(int i = 0; i < input.length() - 1; i++) {
+    		if(input.length() >= i) {
     			if(input.charAt(i) == input.charAt(i + 1)) {   				
-    				compressed.append(String.format("%c%d", input.charAt(i), count));
-        			count = 0;
+    				count++;
+    			}
+    			else if(input.charAt(i) != input.charAt(i + 1)) {   				
+    				compressed.append(input.charAt(i)).append(count);
+    				compressed.replace(0, i, "");
+    				count = 1;
     			}
     		}
     	}
-    	return input;
+    	return compressed;
     }
 }
