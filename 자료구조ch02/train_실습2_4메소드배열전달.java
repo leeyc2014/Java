@@ -8,7 +8,7 @@ package 자료구조ch02;
 import java.util.Random;
 public class train_실습2_4메소드배열전달 {
 	static int top = 0;
-	static final int MAX_LENGTH = 20;
+	static final int MAX_LENGTH = 20;		
 	public static void main(String[] args) {
 		int []data = new int[10];
 		inputData(data);
@@ -18,21 +18,27 @@ public class train_실습2_4메소드배열전달 {
 		boolean existValue = findValue(data, 3);
 		System.out.println("찾는 값 = " + 3 + ", 존재여부 = " + existValue);
 		reverse(data);// 역순으로 출력 
-		showData("역순 데이터", data);
+		showData("역순 데이터", data);		
+	}
+	
+	private static void showData(String msg, int[] data) {
+		//top 갯수까지 출력한다 [1,2,3]등으로 출력하도록 작성
 		
 	}
-	showData() {
-		//top 갯수까지 출력한다 [1,2,3]등으로 출력하도록 작성
-	}
-	inputData() {//교재 63 - 난수의 생성
+	private static void inputData(int[] data) {//교재 63 - 난수의 생성
 		//top이 배열에 저장된 갯수를 저장
+		
 	}
-	findMax() {
+	private static int findMax(int[] data) {
 		//최대값을 리턴한다 
+		
 	}
-	findValue() {
+	private static boolean findValue(int[] data, int num) {
 		//items[]에 value 값이 있는지를 찾아 존재하면 true, 없으면 false로 리턴
 
 	}
-// reverse() 구현
+	// reverse() 구현
+	private static String reverse(int[] data) {
+		
+	}
 }

@@ -22,16 +22,15 @@ public class train_실습1장_과제2문자열압축 {
     	if(input == null || input.isEmpty()) {
     		return input;
     	}
-    	StringBuilder compressed = new StringBuilder(input);
+    	StringBuilder compressed = new StringBuilder();
     	int count = 1;
-    	for(int i = 1; i < input.length(); i++) {
-    		if(input.length() >= i) {
-    			if(input.charAt(i) == input.charAt(i - 1)) {   				
+    	for(int i = 0; i < input.length() - 1; i++) {
+    		if(input.length() >= i + 1) {
+    			if(input.charAt(i) == input.charAt(i + 1)) {   				
     				count++;
     			}
-    			else if(input.charAt(i) != input.charAt(i - 1)) {   				
-    				compressed.append(input.charAt(i - 1)).append(count);
-    				compressed.replace(1, i, "");
+    			else {   				
+    				compressed.append(input.charAt(i)).append(count);
     				count = 1;
     			}
     		}
