@@ -37,22 +37,24 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 //5번 실습 - 2장 실습 2-14를 수정하여 객체 배열의 정렬 구현
-class PhyscData2 implements Comparable<PhyscData2>{
+class Fruit5 {
 	String name;
-	int height;
-	double vision;
-
-	@Override
-	public String toString() {//[홍길동,162,0.3] 형태로 리턴한다 
-		
+	int price;
+	String expire;
+	public Fruit5(String name, int price, String expire) {
+		this.name = name;
+		this.price = price;
+		this.expire = expire;
 	}
-	@Override
-	public int compareTo(PhyscData2 p) {
-		// name 비교 버젼
-		// height 비교 버젼
-	}
-
 }
+	
+class FruitName2 implements Comparator<Fruit5>{
+	@Override
+	public int compare(Fruit5 a, Fruit5 b) {
+		return a.name.compareTo(b.name);
+	}
+}
+
 public class train_실습3_6_1객체배열탐색_Comparable {
 	public static void main(String[] args) {
 		Fruit5[] arr = {new Fruit5("사과", 200, "2023-5-8"), 
@@ -82,24 +84,30 @@ public class train_실습3_6_1객체배열탐색_Comparable {
 		Arrays.sort(arr, cc_price2); // 람다식으로 만들어진 객체를 사용
 		showData("람다식 변수 cc_price2을 사용한 Arrays.sort(arr, cc) 정렬 후", arr);
 		
-		Arrays.sort(arr,/); // Fruit5에 compareTo()가 있어도 람다식 우선 적용
+		Arrays.sort(arr, (a, b) -> a.getPrice() - b.getPrice()); // Fruit5에 compareTo()가 있어도 람다식 우선 적용
 		showData("람다식: (a, b) -> a.getPrice() - b.getPrice()을 사용한 Arrays.sort(arr, cc) 정렬 후", arr);
 
 		System.out.println("\n익명클래스 객체로 정렬(가격)후 객체 배열: ");
 		Arrays.sort(arr, new Comparator<Fruit5>() {//여기서 comparator가 필요한 이유를 알아야 
-			//
+			@Override
+			public int compare(Fruit5 a, Fruit5 b) { //람다식 사용 시 자동생성
+				return a.price - b.price;
 			}
 		});
 		System.out.println("\ncomparator 정렬(이름)후 객체 배열: ");
 		showData("comparator 객체를 사용한 정렬:", arr);
 	
 		Comparator<Fruit5> cc_name = new Comparator<Fruit5>() {// 익명클래스 사용
-			//
+			@Override
+			public int compare(Fruit5 a, Fruit5 b) {
+				return a.name.compareTo(b.name);
 			}
-
 		};
-		Comparator<Fruit5> cc_price =
-
+		Comparator<Fruit5> cc_price = new Comparator<Fruit5>() {
+			@Override
+			public int compare(Fruit5 a, Fruit5 b) {
+				return a.price - b.price;
+			}
 		};
 
 		Fruit5 newFruit5 = new Fruit5("수박", 880, "2023-5-18");
@@ -124,6 +132,9 @@ public class train_실습3_6_1객체배열탐색_Comparable {
 	
 	}
 	
+	private static int binarySearch(Fruit5[] arr, Fruit5 newFruit, Comparator<Fruit5> cc) {
+		
+	}
 	
 
 }

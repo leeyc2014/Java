@@ -8,6 +8,27 @@ package 자료구조ch03;
 */
 import java.util.Arrays;
 public class train_실습3_6_0스트링배열정렬이진탐색 {
+	private static void swap(String[] data, int i, int j) {
+		
+	}
+	
+	private static void showData(String[] data) {
+		for(int i = 0; i < data.length; i++) {
+			for(int j = i + 1; j < data.length; j++) {
+				if(data[i].compareTo(data[j]) > 0) {
+					swap(data, i, j);
+				}
+			}
+		}
+	}
+	
+	private static int linearSearh(int[] data, String key) {
+		
+	}
+	
+	private static int binarySearch(int[] data, String key) {
+		
+	}
 
 	public static void main(String[] args) {
 		String []data = {"사과","포도","복숭아", "감", "산딸기", "블루베리", "대추", "수박", "참외"};

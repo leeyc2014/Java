@@ -3,13 +3,23 @@ package 자료구조ch03;
 * 3장 1번 실습과제: 03-3 정수배열이진검색
 * 함수(메소드)에 parameter 전달 방식을 표현하는 능력의 숙달 훈련
 * 함수(메소드) 전체를 작성하는 훈련 
-* 3장 - 1번 실습 과제 > 2번 실습: 스트링 객체의 정렬과 이진 탐색 > 3번 실습: 객체 정렬과 이진 탐색
+* 3장 - 1번 실습 과제 : 정수배열 > 2번 실습: 스트링 객체의 정렬과 이진 탐색 > 3번 실습: 객체 정렬과 이진 탐색
 */
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 public class train_실습3_4정수배열이진탐색 {
-
+	private static void inputData(int[] data) {
+		Random rd = new Random(11);
+		for() {
+			
+		}
+	}
+	
+	private static void showList(String msg, int[] data) {
+		
+	}
+	
 	public static void main(String[] args) {
 		int []data = new int[30];
 		inputData(data);// 구현 반복 숙달 훈련 - 100 이하 난수를 생성
@@ -36,6 +46,21 @@ public class train_실습3_4정수배열이진탐색 {
 		 */
 		resultIndex = Arrays.binarySearch(data, key);
 		System.out.println("\nArrays.binarySearch(10): result = " + resultIndex);
-
+	}
+	
+	private static int binarySearch(int[] data, int key) {
+		int pl = 0;
+		int pr = data.length - 1;
+		int pc;
+		for(int i = 0; i < data.length; i++) { //최대 n번 아님
+			pc = (pl + pr) / 2;
+			if() {
+				
+			}
+		}
+	}
+	
+	private static int lenearSearch(int[] data, int key) {
+		
 	}
 }
