@@ -129,7 +129,7 @@ class Library<T extends MediaBook> {
 
 	// 책 추가 (용량 초과 시 OverflowException 발생)
 	public void addBook(T book) {
-		if(items.size() > CAPACITY) {
+		if(items.size() >= CAPACITY) {
 			throw new OverflowException("용량 초과");
 		}
 		items.add(book);
@@ -158,17 +158,27 @@ class Library<T extends MediaBook> {
 	// 제목으로 정렬
 	public void sortBooksByTitle() {
 		// 익명 클래스로 구현
-		
+		Collections.sort(items, new Comparator<T>() {
+			public int compare(T a, T b) {
+				return a.getTitle().compareTo(b.getTitle());
+			}
+		});
 	}
 
 	// ISBN으로 정렬
 	public void sortBooksByISBN() {
 		// 람다식으로 구현
+		Collections.sort(items, (a, b) -> a.getISBN().compareTo(b.getISBN()));
 	}
 
 	// 책 검색
 	public T searchBookByTitle(String title) {
 		// 구현
+		for (int i = 0; i < items.size(); i++) {
+			if (title.equals(items.get(i).getTitle())) {
+				return items.get(i);
+			}
+		}
 		return null;
 	}
 }
@@ -187,7 +197,14 @@ public class 실습_14_3_람다식_실습과제 {
 		// 예외 처리를 적용한 책 추가
         System.out.println("\n>>>책 추가");
         // forEach 람다식으로 구현
-//	    books.forEach();
+        books.forEach(book -> {
+        	try {
+        		library.addBook(book);
+        	}
+        	catch (OverflowException e) {
+        		System.out.println(e.getMessage());
+        	}
+        });
 
 		// 도서 목록 출력
         library.printBooks("\n>>>현재 도서 목록:");
