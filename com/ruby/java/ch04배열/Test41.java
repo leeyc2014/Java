@@ -11,7 +11,7 @@ public class Test41 {
 		int[][] arr = new int[row][col];
 		Random rd = new Random();
 		for(int i = 0; i < row; i++) {
-			for (int j = 9; j < col; j++) {
+			for (int j = 0; j < col; j++) {
 				arr[i][j] = rd.nextInt(0,101);
 			}
 		}
