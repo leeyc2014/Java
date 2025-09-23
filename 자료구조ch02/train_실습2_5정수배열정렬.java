@@ -35,11 +35,32 @@ public class train_실습2_5정수배열정렬 {
 	 * 삽입된 값이 중간에 들어가는 알고리즘 구현하기
 	 * O(n) 알고리즘으로 구현 
 	 */
-	static int[] insertData(int []data, int value) {//insert되는 실수 값이 insert될 위치를 찾아 보다 큰 값은 우측으로 이동
+	private static int[] insertData(int []data, int value) {//insert되는 실수 값이 insert될 위치를 찾아 보다 큰 값은 우측으로 이동
 		int newData[] = new int[data.length+1];
-
+		
+		
+	}
+	
+	private static void inputData(int[] data) {
+		Random rd = new Random();
+		for(int i = 0; i < data.length; i++) {
+			data[i] = rd.nextInt((60) + 1);
+		}
+	}
+	
+	private static void showData(String msg, int[] data) {
+		
+	}
+	
+	private static void reverse(int[] data) {
 		
 	}
 
-
+	private static void sortData(int[] data) {
+		
+	}
+	
+	private static void reverseSort(int[] data) {
+		
+	}
 }
