@@ -28,8 +28,7 @@ public class train_실습2_5정수배열정렬 {
 			System.out.print("\n\n"+ newData+ " : ");
 			showData("실수 삽입후", result);
 		}
-	}
-	
+	}	
 	/*
 	 * 난이도가 매우 높은 알고리즘 구현
 	 * 정렬된 기존 배열에 임의 값을 추가하는 알고리즘 > 새 배열의 크기는 기존 배열보다 +1로 만들고 기존 배열을 copy할 때
