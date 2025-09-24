@@ -9,17 +9,36 @@ import java.util.Arrays;
 public class train_실습2_14스트링배열정렬 {
 	private static void showData(String str, String[] data) {
 		//출력 양식 : ["apple", "grape", ...]
+		int index = 0;
 		System.out.println(str);
-		System.out.println(data);
+		//System.out.println(data);
+		System.out.print("[");
 		for(String st: data) {
-			System.out.println(st);
-		}
+			System.out.print("\"" + st + "\""); 
+			if(index < data.length - 1) {
+				System.out.print(", ");
+			}			
+			index++;
+		}		
+		System.out.print("]");
+		System.out.println();		
 	}
 	
 	private static String[] sortData(String[] data) {
 		Arrays.sort(data, (s1,s2)->s1.compareTo(s2));
 		return data;
 	}
+	
+	private static String[] insertString(String[] data, String msg) {
+		String[] newData = new String[data.length + 1];
+		for(int i = 0; i < data.length; i++) {
+			newData[i] = data[i];
+		}
+		newData[data.length] = msg;
+		//Arrays.sort(newData, (s1,s2)->s1.compareTo(s2));
+		return newData;
+	}
+	
 	public static void main(String[] args) {
 		String []data = {"apple","grape","persimmon", "pear","blueberry", "strawberry", "melon", "oriental melon"};
 
