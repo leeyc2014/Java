@@ -40,7 +40,7 @@ class Data {
 		int[][] sum = new int[row][col];
 		for(int i = 0; i < row; i++) {
 			for(int j = 0; j < col; j++) {
-				sum[row][col] = data1[row][col] + data2[row][col];
+				sum[i][j] = data1[i][j] + data2[i][j];
 			}
 		}
 		return sum;
@@ -50,7 +50,7 @@ class Data {
 		int[][] mul = new int[row][col];
 		for(int i = 0; i < row; i++) {
 			for(int j = 0; j < col; j++) {
-				mul[row][col] = data1[row][col] * data2[row][col];
+				mul[i][j] = data1[i][j] * data2[i][j];
 			}
 		}
 		return mul;
@@ -60,7 +60,7 @@ class Data {
 		int[][] newData = new int[row][col];
 		for(int i = 0; i < row; i++) {
 			for(int j = 0; j < col; j++) {
-				newData[row][col] = data[row][col];
+				newData[i][j] = data[i][j];
 			}
 		}
 		return newData;
@@ -70,7 +70,7 @@ class Data {
 		int[][] transMul = new int [row][col];
 		for(int i = 0; i < row; i++) {
 			for(int j = 0; j < col; j++) {
-				transMul[col][row] = data1[row][col] * data2[row][col];
+				transMul[j][i] = data1[i][j] * data2[i][j];
 			}
 		}
 		return transMul;
