@@ -9,16 +9,37 @@ import java.util.Comparator;
  */
 
 class PhyscData3 {
-	String name;
-	int height;
-	double vision;
+	private String name;
+	private int height;
+	private double vision;
+	
+	public String getName() {
+		return name;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	
+	public double getVision() {
+		return vision;
+	}
 
+	@Override
+	public String toString() {
+		return "PhyscData3 [name=" + name + ", height=" + height + ", vision=" + vision + "]";
+	}
 }
-class NameHeightVision implements Comparator<PhyscData4>{
 
+class NameHeightVision implements Comparator<PhyscData3>{
+	
 }
 class NameOrder implements Comparator<PhyscData3>{
-
+	Comparator<PhyscData3> orderName = new Comparator<PhyscData3>() {
+		public int compare(PhyscData3 a, PhyscData3 b) {
+			return a.getName().compareTo(b.getName());
+		}
+	};
 }
 class HeightOrder implements Comparator<PhyscData3>{
 

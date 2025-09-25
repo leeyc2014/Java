@@ -38,24 +38,89 @@ import java.util.Comparator;
 
 //5번 실습 - 2장 실습 2-14를 수정하여 객체 배열의 정렬 구현
 class Fruit5 {
-	String name;
-	int price;
-	String expire;
+	private String name;
+	private int price;
+	private String expire;
+	
 	public Fruit5(String name, int price, String expire) {
 		this.name = name;
 		this.price = price;
 		this.expire = expire;
 	}
-}
 	
+	public String getName() {
+		return name;
+	}
+	
+	public int getPrice() {
+		return price;
+	}
+	
+	public String getExpire() {
+		return expire;
+	}
+	
+	@Override
+	public String toString() {
+		return "Fruit5 [name=" + name + ", price=" + price + ", expire=" + expire + "]";
+	}	
+}
+
 class FruitName2 implements Comparator<Fruit5>{
 	@Override
 	public int compare(Fruit5 a, Fruit5 b) {
-		return a.name.compareTo(b.name);
+		return a.getName().compareTo(b.getName());
 	}
 }
 
 public class train_실습3_6_1객체배열탐색_Comparable {
+	
+	private static void showData(String msg, Fruit5[] arr) {
+		System.out.print(msg + "\n");
+		for(Fruit5 fruit : arr) {
+			System.out.printf("%s\t%d\t%s\n", fruit.getName(), fruit.getPrice(), fruit.getExpire());
+		}
+		System.out.println("-".repeat(30));
+		System.out.println();
+	}
+	
+	private static void reverse(Fruit5[] arr) {
+		for(int i = 0; i < arr.length; i++) {
+			for(int j = i + 1; j < arr.length; j++) {
+				Fruit5 temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}				
+		}
+	}
+	
+	private static void sortData(Fruit5[] arr, FruitName2 cc) {
+		Arrays.sort(arr, cc);
+	}
+	
+	private static void sortData2(Fruit5[] arr, Comparator<Fruit5> price) {
+		Arrays.sort(arr, (a, b) -> a.getPrice() - b.getPrice());
+	}
+	
+	private static int binarySearch(Fruit5[] arr, Fruit5 newFruit, Comparator<Fruit5> cc) {		
+		int left = 0;
+		int right = arr.length - 1;
+		while(left <= right) {
+			int mid = (left + right) / 2;
+			if(cmd == 0) {
+				return mid;
+			}
+			else if(cmd < 0) {
+				left = mid + 1;
+			}
+			else {
+				right = mid - 1;
+			}
+		}
+		
+		return -1;
+	}
+	
 	public static void main(String[] args) {
 		Fruit5[] arr = {new Fruit5("사과", 200, "2023-5-8"), 
 				new Fruit5("감", 500, "2023-6-8"),
@@ -81,9 +146,12 @@ public class train_실습3_6_1객체배열탐색_Comparable {
 		// 람다식은 익명클래스 + 익명 객체이다 - Comparator 객체를 사용하려면 compare() 메소드를 구현해야 하는 데 이것이 람다식이다
 		//compare()를 구현해야 하므로 (a,b)이다 왜 람다식에서 parameter가 2개인지 이유를 이해 필요 
 		//
+		
+		Comparator<Fruit5> cc_price2 = (a, b) -> a.getPrice() - b.getPrice();
 		Arrays.sort(arr, cc_price2); // 람다식으로 만들어진 객체를 사용
 		showData("람다식 변수 cc_price2을 사용한 Arrays.sort(arr, cc) 정렬 후", arr);
 		
+		Arrays.sort(arr, cc);
 		Arrays.sort(arr, (a, b) -> a.getPrice() - b.getPrice()); // Fruit5에 compareTo()가 있어도 람다식 우선 적용
 		showData("람다식: (a, b) -> a.getPrice() - b.getPrice()을 사용한 Arrays.sort(arr, cc) 정렬 후", arr);
 
@@ -91,22 +159,23 @@ public class train_실습3_6_1객체배열탐색_Comparable {
 		Arrays.sort(arr, new Comparator<Fruit5>() {//여기서 comparator가 필요한 이유를 알아야 
 			@Override
 			public int compare(Fruit5 a, Fruit5 b) { //람다식 사용 시 자동생성
-				return a.price - b.price;
+				return a.getPrice() - b.getPrice();
 			}
 		});
 		System.out.println("\ncomparator 정렬(이름)후 객체 배열: ");
+		
 		showData("comparator 객체를 사용한 정렬:", arr);
 	
 		Comparator<Fruit5> cc_name = new Comparator<Fruit5>() {// 익명클래스 사용
 			@Override
 			public int compare(Fruit5 a, Fruit5 b) {
-				return a.name.compareTo(b.name);
+				return a.getName().compareTo(b.getName());
 			}
 		};
 		Comparator<Fruit5> cc_price = new Comparator<Fruit5>() {
 			@Override
 			public int compare(Fruit5 a, Fruit5 b) {
-				return a.price - b.price;
+				return a.getPrice() - b.getPrice();
 			}
 		};
 
@@ -130,11 +199,5 @@ public class train_실습3_6_1객체배열탐색_Comparable {
 		result3Index = binarySearch(arr, newFruit5, cc_price);
 		System.out.println("\nbinarySearch() 조회결과::" + result3Index);
 	
-	}
-	
-	private static int binarySearch(Fruit5[] arr, Fruit5 newFruit, Comparator<Fruit5> cc) {
-		
-	}
-	
-
+	}	
 }

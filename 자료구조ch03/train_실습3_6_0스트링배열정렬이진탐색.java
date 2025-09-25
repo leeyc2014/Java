@@ -8,26 +8,57 @@ package 자료구조ch03;
 */
 import java.util.Arrays;
 public class train_실습3_6_0스트링배열정렬이진탐색 {
-	private static void swap(String[] data, int i, int j) {
-		
-	}
-	
-	private static void showData(String[] data) {
+	private static void sortData(String[] data) {
 		for(int i = 0; i < data.length; i++) {
 			for(int j = i + 1; j < data.length; j++) {
 				if(data[i].compareTo(data[j]) > 0) {
-					swap(data, i, j);
+					String temp = data[i];
+					data[i] = data[j];
+					data[j] = temp;
 				}
 			}
 		}
 	}
 	
-	private static int linearSearh(int[] data, String key) {
-		
+	private static void showData(String msg, String[] data) {
+		System.out.println(msg);
+		System.out.print("[");
+		for(int i = 0; i < data.length; i++) {
+			System.out.print(data[i]);
+			if(i < data.length - 1) {
+				System.out.print(", ");
+			}
+		}
+		System.out.print("]");
+		System.out.println();
 	}
 	
-	private static int binarySearch(int[] data, String key) {
-		
+	private static int linearSearch(String[] data, String key) {
+		for(int i = 0; i < data.length; i++) {
+			if(data[i].compareTo(key) == 0) {
+				return i; 
+			}
+		}
+		return -1;
+	}
+	
+	private static int binarySearch(String[] data, String key) {
+		int left = 0;
+		int right = data.length - 1;
+		while(left <= right) {
+			int mid = (left + right) / 2;
+			int cmp = data[mid].compareTo(key);
+			if(cmp == 0) {
+				return mid;
+			}
+			else if(cmp < 0) {
+				left = mid + 1;
+			}
+			else {
+				right = mid - 1;
+			}
+		}
+		return -1;
 	}
 
 	public static void main(String[] args) {

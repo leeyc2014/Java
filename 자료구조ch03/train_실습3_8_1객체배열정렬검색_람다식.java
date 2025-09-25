@@ -23,7 +23,7 @@ class Fruit4 {
 class FruitName implements Comparator<Fruit4>{}
 class FruitPrice implements Comparator<Fruit4>{}
 
-public class Test_실습3_7객체배열이진탐색 {
+public class train_실습3_8_1객체배열정렬검색_람다식 {
 
 	private static void sortData(Fruit4[] arr, Comparator<Fruit4> cc_price) {}
 
