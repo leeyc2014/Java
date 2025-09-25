@@ -107,10 +107,11 @@ public class train_실습3_6_1객체배열탐색_Comparable {
 		int right = arr.length - 1;
 		while(left <= right) {
 			int mid = (left + right) / 2;
-			if(cmd == 0) {
+			int cmp = cc.compare(arr[mid], newFruit);
+			if(cmp == 0) {
 				return mid;
 			}
-			else if(cmd < 0) {
+			else if(cmp < 0) {
 				left = mid + 1;
 			}
 			else {
@@ -178,6 +179,12 @@ public class train_실습3_6_1객체배열탐색_Comparable {
 				return a.getPrice() - b.getPrice();
 			}
 		};
+		Comparator<Fruit5> cc_expire = new Comparator<Fruit5>() {
+			@Override
+			public int compare(Fruit5 a, Fruit5 b) {
+				return a.getExpire().compareTo(b.getExpire());
+			}
+		};
 
 		Fruit5 newFruit5 = new Fruit5("수박", 880, "2023-5-18");
 		/*
@@ -197,6 +204,12 @@ public class train_실습3_6_1객체배열탐색_Comparable {
 		System.out.println("\nArrays.binarySearch([수박,880,2023-5-18]) 조회결과::" + result3Index);
 		
 		result3Index = binarySearch(arr, newFruit5, cc_price);
+		System.out.println("\nbinarySearch() 조회결과::" + result3Index);
+		
+		result3Index = Arrays.binarySearch(arr, newFruit5, cc_expire);
+		System.out.println("\nArrays.binarySearch([수박,880,2023-5-18]) 조회결과::" + result3Index);
+		
+		result3Index = binarySearch(arr, newFruit5, cc_expire);
 		System.out.println("\nbinarySearch() 조회결과::" + result3Index);
 	
 	}	

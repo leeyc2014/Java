@@ -118,7 +118,7 @@ public class train_실습2_14_1객체배열정렬 {
 		/*익명 클래스
 		Comparator<PhyscData2> heightComparator = new Comparator<PhyscData2>() {
 			public int compare(PhyscData2 o1, PhyscData2 o2) {
-				return Integer.cmopare(o1.getHeight(), o2.getHeight());
+				return Integer.compare(o1.getHeight(), o2.getHeight());
 			}
 		};*/
 		

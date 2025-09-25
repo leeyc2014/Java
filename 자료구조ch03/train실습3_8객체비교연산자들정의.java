@@ -13,6 +13,12 @@ class PhyscData3 {
 	private int height;
 	private double vision;
 	
+	public PhyscData3(String name, int height, double vision) {
+		this.name = name;
+		this.height = height;
+		this.vision = vision;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -32,23 +38,48 @@ class PhyscData3 {
 }
 
 class NameHeightVision implements Comparator<PhyscData3>{
-	
-}
-class NameOrder implements Comparator<PhyscData3>{
-	Comparator<PhyscData3> orderName = new Comparator<PhyscData3>() {
-		public int compare(PhyscData3 a, PhyscData3 b) {
-			return a.getName().compareTo(b.getName());
+	public int compare(PhyscData3 a, PhyscData3 b) {
+		int comName = a.getName().compareTo(b.getName());
+		int comHeight = a.getHeight() - b.getHeight();
+		int comVision = Double.compare(a.getVision(), b.getVision());
+		if(comName == 0) {
+			return comHeight;
 		}
-	};
+		if(comHeight == 0) {
+			return comVision;
+		}
+		return comName;
+	}
 }
-class HeightOrder implements Comparator<PhyscData3>{
 
+class NameOrder implements Comparator<PhyscData3>{ 
+	public int compare(PhyscData3 a, PhyscData3 b) {
+		return a.getName().compareTo(b.getName());
+	}
+}
+
+class HeightOrder implements Comparator<PhyscData3>{
+	public int compare(PhyscData3 a, PhyscData3 b) {
+		return a.getHeight() - b.getHeight();
+	}
 }
 class VisionOrder implements Comparator<PhyscData3>{
-
+	public int compare(PhyscData3 a, PhyscData3 b) {
+		return Double.compare(a.getVision(), b.getVision());
+	}
 }
 public class train실습3_8객체비교연산자들정의 {	
 	static final Comparator<PhyscData3> HEIGHT_ORDER = new HeightOrder();
+	
+	public static void showData(String msg, PhyscData3[] data) {
+		System.out.print(msg + ": \n");
+		System.out.println("-".repeat(30));
+		for(PhyscData3 arr : data) {
+			System.out.printf("%s\t%d\t%.2f\n", arr.getName(), arr.getHeight(), arr.getVision());
+		}
+		System.out.print("-".repeat(30));
+		System.out.println();
+	}
 
 	public static void main(String[] args) {
 		PhyscData3[] data = {

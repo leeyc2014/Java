@@ -9,10 +9,7 @@ package 자료구조ch02;
 import java.util.Arrays;
 import java.util.Random;
 
-class Data {
-	private static int row;
-	private static int col;
-	
+public class train_실습2_6다차원배열{
 	public static void inputData(int[][] data) {
 		Random rd = new Random();
 		for(int i = 0; i < data.length; i++) {
@@ -99,9 +96,7 @@ class Data {
 		}
 		return true;
 	}
-}
-
-public class train_실습2_6다차원배열 extends Data{
+	
 	public static void main(String[] args) {
 		int [][]A = new int[2][3];
 		int [][]B = new int[3][4];
