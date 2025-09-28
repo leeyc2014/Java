@@ -26,7 +26,7 @@ class Point2 {
 
 	@Override
 	public String toString() {
-	
+		
 	}
 
 	@Override

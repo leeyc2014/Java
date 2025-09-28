@@ -106,7 +106,7 @@ public class train_실습3_8_1객체배열정렬검색_람다식 {
 		showData("Arrays.sort(arr, cc) Name 정렬 후", arr);
 		
 		sortData(arr, new FruitPrice());
-		showData("Arrays.sort(arr, cc)  Price 실행후", arr);
+		showData("Arrays.sort(arr, cc)  Price 실행후", arr);		// 정렬 안되는 이유 모르겠습니다...
 		
 		// 람다식은 익명클래스 + 익명 객체이다
 		Comparator<Fruit4> cc_expire = (a, b) -> a.getExpire().compareTo(b.getExpire());

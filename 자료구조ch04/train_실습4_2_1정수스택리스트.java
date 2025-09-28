@@ -23,22 +23,25 @@ class IntStack4 {
 
 //--- 실행시 예외: 스택이 비어있음 ---//
 	public class EmptyIntStackException extends RuntimeException {
-//추가
+//추가	
+		public EmptyIntStackException(String msg) {
+			super(msg);
+		}
 	}
-}
-}
-/*
-public class RuntimeException extends Exception {
+
+/*	public class RuntimeException extends Exception {
 // 생성자 중 하나: 메시지를 받는 생성자
-public RuntimeException(String message) {
-    // 부모 클래스인 Throwable 클래스의 생성자 호출
-    super(message);
-}
-}
+		public RuntimeException(String message) {
+			// 부모 클래스인 Throwable 클래스의 생성자 호출
+			super(message);
+		}
 */
 //--- 실행시 예외: 스택이 가득 참 ---//
 	public class OverflowIntStackException extends RuntimeException {
 //추가
+		public OverflowIntStackException(String msg) {
+			super(msg);
+		}
 	}
 
 //--- 생성자(constructor) ---//

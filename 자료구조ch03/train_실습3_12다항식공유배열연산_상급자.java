@@ -1,18 +1,17 @@
 package 자료구조ch03;
 
 import java.util.Random;
-import java.util.Arrays;
 import java.util.Scanner;
 
-class Term {
+class Term2 {
     int coef; // 계수
     int exp;  // 지수
-    Term() {}
-    Term(int c, int e) { this.coef = c; this.exp = e; }
+    Term2() {}
+    Term2(int c, int e) { this.coef = c; this.exp = e; }
 }
 
-class Polynomial {
-    private static Term[] TermElement = new Term[128];
+class Polynomial2 {
+    private static Term2[] TermElement = new Term2[128];
     private static int capacity = 128;
     private static int free = 0; 
 
@@ -27,7 +26,7 @@ class Polynomial {
 
     public void newTerm(int c, int e) {
         if (c == 0) return;
-        if (TermElement[free] == null) TermElement[free] = new Term();
+        if (TermElement[free] == null) TermElement[free] = new Term2();
         TermElement[free].coef = c;
         TermElement[free].exp  = e;
         free++;
