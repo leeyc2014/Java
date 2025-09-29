@@ -10,7 +10,7 @@ class Term {
 }
 
 class Polynomial {
-	static ArrayList<Term> terms = new ArrayList<>();
+	ArrayList<Term> terms = new ArrayList<>();
 	static int capacity;
 	static int free;
 	int start;
@@ -52,6 +52,26 @@ class Polynomial {
             if (expo == 0) break;
         }
     }
+
+	public Polynomial add(Polynomial p2) {
+		return null;
+	}
+
+	public Polynomial subtract(Polynomial p2) {
+		return null;
+	}
+
+	public Polynomial multiply(Polynomial p2) {
+		return null;
+	}
+
+	public int eval(int i) {
+		return 0;
+	}
+
+	public void addTerm(int i, int j) {
+		
+	}
 }
 public class train_실습3_11_다항식객체연산_상급자 {
     private static final Random RAND = new Random(49);

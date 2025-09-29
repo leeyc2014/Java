@@ -23,35 +23,35 @@ class IntStack4 {
 
 //--- 실행시 예외: 스택이 비어있음 ---//
 	public class EmptyIntStackException extends RuntimeException {
-//추가	
+//추가
 		public EmptyIntStackException(String msg) {
 			super(msg);
 		}
 	}
 
-/*	public class RuntimeException extends Exception {
+/*
+public class RuntimeException extends Exception {
 // 생성자 중 하나: 메시지를 받는 생성자
-		public RuntimeException(String message) {
-			// 부모 클래스인 Throwable 클래스의 생성자 호출
-			super(message);
-		}
+public RuntimeException(String message) {
+    // 부모 클래스인 Throwable 클래스의 생성자 호출
+    super(message);
+}
+}
 */
 //--- 실행시 예외: 스택이 가득 참 ---//
 	public class OverflowIntStackException extends RuntimeException {
-//추가
+		//추가
 		public OverflowIntStackException(String msg) {
 			super(msg);
-		}
 	}
 
 //--- 생성자(constructor) ---//
 	public IntStack4(int maxlen) {
 //추가
-		stk = new ArrayList<Integer>(maxlen);
-		top = 0;
-		capacity = maxlen;
-		
 		try {
+			this.capacity = maxlen;
+			top = 0;
+		}
 		//추가
 		} catch (OutOfMemoryError e) { // 생성할 수 없음
 			capacity = 0;
@@ -62,18 +62,13 @@ class IntStack4 {
 	public void push(int x) throws OverflowIntStackException {
 		if (isFull()) // 스택이 가득 참
 			throw new OverflowIntStackException("push: stack overflow");
-		stk.add(null);
-		top++;
-//추가	
+//추가
 	}
 
 //--- 스택에서 데이터를 팝(정상에 있는 데이터를 꺼냄) ---//
 	public int pop() throws EmptyIntStackException {
 		if (isEmpty()) // 스택이 빔
 			throw new EmptyIntStackException("pop: stack empty");
-		int result = stk.remove(top - 1);
-		top--;
-		return result;
 //추가
 	}
 
@@ -99,6 +94,8 @@ class IntStack4 {
 //--- 스택에서 x를 찾아 인덱스(없으면 –1)를 반환 ---//
 	public int indexOf(int x) {
 //추가
+		for
+		}
 	}
 
 //--- 스택의 크기를 반환 ---//
