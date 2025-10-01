@@ -15,6 +15,7 @@ class 실습6_2BubbleSort2 {
  //--- 단순교환정렬(버전 2 : 교환 횟수에 따른 멈춤)---//
  static void bubbleSort(int[] a, int n) {
 	 int count = 0;
+	 int exchgcnt = 0;
      for (int i = 0; i < n - 1; i++) {
          int exchg = 0;                          // 패스에서 교환하는 횟수
          for (int j = n - 1; j > i; j--)
@@ -23,11 +24,13 @@ class 실습6_2BubbleSort2 {
              if (a[j - 1] > a[j]) {//버블
                  swap(a, j - 1, j);
                  exchg++;
+                 exchgcnt = exchg;
              }
          }
          if (exchg == 0) break;  // 교환이 이루어지지 않으면 멈춤 - 추가된 코드 
      }
      System.out.println("\n비교 횟수 = " + count);
+     System.out.println("교환 횟수 = " + exchgcnt);
  }
  static void showData(int[] d) {
      for (int i = 0; i < d.length; i++)

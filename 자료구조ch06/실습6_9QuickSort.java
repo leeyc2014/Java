@@ -24,9 +24,10 @@ class 실습6_9QuickSort {
      do {
          while (a[pl] < x) {pl++;count++;}
          while (a[pr] > x) {pr--;count++;}
-         if (pl <= pr)
+         if (pl <= pr) {
              swap(a, pl++, pr--);
-         count++;
+             count++;
+         }
      } while (pl <= pr);
     // System.out.println("pl = " + pl + ", pr = " + pr);
      if (left < pr)  quickSort(a, left, pr);

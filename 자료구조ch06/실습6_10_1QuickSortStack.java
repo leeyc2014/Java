@@ -3,6 +3,7 @@ package 자료구조ch06;
 //퀵 정렬(비재귀 버전) - 교재 버젼으로 stack을 2개 사용하는 문제가 있다 
 
 import java.util.Scanner;
+import java.util.Stack;
 
 public class 실습6_10_1QuickSortStack {
  //--- 배열 요소 a[idx1]와 a[idx2]의 값을 교환 ---//
@@ -12,17 +13,26 @@ public class 실습6_10_1QuickSortStack {
 
  //--- 퀵 정렬(비재귀 버전)---//
  static void quickSort(int[] a, int left, int right) {
-     IntStack lstack = new IntStack(right - left + 1);
+     /*IntStack lstack = new IntStack(right - left + 1);
      IntStack rstack = new IntStack(right - left + 1);
 
      lstack.push(left);
-     rstack.push(right);
+     rstack.push(right);*/
+	 Stack<Point> st = new Stack<>();
+	 Point p = new Point(left, right);
+	 st.push(p);
+	 
+	 while (!st.isEmpty()) {
+		 p = st.pop();
+		 int pl = left = p.left;
+		 int pr = right = p.right;
+		 int x = a[(left + right) / 2];
 
-     while (!lstack.isEmpty()) {
+     /*while (!lstack.isEmpty()) {
          int pl = left  = lstack.pop();        // 왼쪽 커서
          int pr = right = rstack.pop();        // 오른쪽 커서
          int x = a[(left + right) / 2];        // 피벗은 가운데 요소
-
+*/
          do {
              while (a[pl] < x) pl++;
              while (a[pr] > x) pr--;
@@ -32,14 +42,18 @@ public class 실습6_10_1QuickSortStack {
          showData(a);
          System.out.println();
          if (left < pr) {
+        	 p = new Point(left, pr);
+        	 st.push(p);
         	 System.out.println("left = " + left + ", pr = " + pr);
-             lstack.push(left);           // 왼쪽 그룹 범위의
-             rstack.push(pr);             // 인덱스를 푸시
+             // lstack.push(left);           // 왼쪽 그룹 범위의
+             // rstack.push(pr);             // 인덱스를 푸시
          }
          if (pl < right) {
-          	 System.out.println("pl = " + pl + ", right = " + right);
-             lstack.push(pl);             // 오른쪽 그룹 범위의
-             rstack.push(right);          // 인덱스를 푸시
+        	 p = new Point(right, pl);
+        	 st.push(p);
+        	 System.out.println("pl = " + pl + ", right = " + right);
+             // lstack.push(pl);             // 오른쪽 그룹 범위의
+             // rstack.push(right);          // 인덱스를 푸시
          }
      }
  }
