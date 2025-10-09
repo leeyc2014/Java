@@ -20,7 +20,8 @@ class IntStack4 {
 	private List<Integer> stk; // 스택용 리스트
 	private int capacity; // 스택의 크기
 	private int top; // 스택 포인터
-
+	
+	public IntStack4() {}
 //--- 실행시 예외: 스택이 비어있음 ---//
 	public class EmptyIntStackException extends RuntimeException {
 //추가
@@ -43,7 +44,9 @@ public RuntimeException(String message) {
 		//추가
 		public OverflowIntStackException(String msg) {
 			super(msg);
+		}
 	}
+		
 
 //--- 생성자(constructor) ---//
 	public IntStack4(int maxlen) {
@@ -53,7 +56,7 @@ public RuntimeException(String message) {
 			top = 0;
 		}
 		//추가
-		} catch (OutOfMemoryError e) { // 생성할 수 없음
+		catch (OutOfMemoryError e) { // 생성할 수 없음
 			capacity = 0;
 		}
 	}
@@ -62,7 +65,8 @@ public RuntimeException(String message) {
 	public void push(int x) throws OverflowIntStackException {
 		if (isFull()) // 스택이 가득 참
 			throw new OverflowIntStackException("push: stack overflow");
-//추가
+//추가	
+		stk.add(x);
 	}
 
 //--- 스택에서 데이터를 팝(정상에 있는 데이터를 꺼냄) ---//
@@ -70,6 +74,7 @@ public RuntimeException(String message) {
 		if (isEmpty()) // 스택이 빔
 			throw new EmptyIntStackException("pop: stack empty");
 //추가
+		return stk.remove(stk.size() - 1);
 	}
 
 //--- 스택에서 데이터를 피크(peek, 정상에 있는 데이터를 들여다봄) ---//
@@ -77,6 +82,7 @@ public RuntimeException(String message) {
 		if (isEmpty()) // 스택이 빔
 			throw new EmptyIntStackException("peek: stack empty");
 //추가
+		return stk.get(stk.size() - 1);
 	}
 
 //--- 스택을 비움 ---//
@@ -94,28 +100,36 @@ public RuntimeException(String message) {
 //--- 스택에서 x를 찾아 인덱스(없으면 –1)를 반환 ---//
 	public int indexOf(int x) {
 //추가
-		for
+		for(int i = top - 1; i >= 0; i--) {
+			if(stk.get(i) == x) {
+				return i;
+			}
 		}
+		return -1;
 	}
 
 //--- 스택의 크기를 반환 ---//
 	public int getCapacity() {
 		//추가
+		return capacity;
 	}
 
 //--- 스택에 쌓여있는 데이터 갯수를 반환 ---//
 	public int size() {
 	//추가
+		return top;
 	}
 
 //--- 스택이 비어있는가? ---//
 	public boolean isEmpty() {
 		//추가
+		return top <= 0;
 	}
 
 //--- 스택이 가득 찼는가? ---//
 	public boolean isFull() {
 		//추가
+		return top >= capacity;
 	}
 	
 //--- 스택 안의 모든 데이터를 바닥 → 정상 순서로 표시 ---//
@@ -126,6 +140,10 @@ public RuntimeException(String message) {
 		}
 		else {
 			//추가할 부분
+			for(int i = 0; i < top; i++) {
+				System.out.println(stk);
+			}
+			System.out.println();
 		}
 	}
 }

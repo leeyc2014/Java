@@ -15,6 +15,8 @@ import java.util.List;
 */
 import java.util.Random;
 import java.util.Scanner;
+
+import 자료구조ch04.IntStack4.EmptyIntStackException;
 class Point2 {
 	private int ix;
 	private int iy;
@@ -29,10 +31,10 @@ class Point2 {
 		return "Point2 [ix=" + ix + ", iy=" + iy + "]";
 	}
 
-	@Override
-	public boolean equals(Object p) {
-		
-	}
+//	@Override
+//	public boolean equals(Object p) {
+//		
+//	}
 }
 
 class objectStack{
@@ -72,17 +74,30 @@ class objectStack{
 //--- 스택에 x를 푸시 ---//
 	public boolean push(Point2 x) throws OverflowGenericStackException {
 		//구현
-
+		if(isFull()) {
+			throw new OverflowGenericStackException("push: stack overflow");
+		}
+		data.add(x);
+		top++;
+		return true;
 	}
 
 //--- 스택에서 데이터를 팝(정상에 있는 데이터를 꺼냄) ---//
 	public Point2 pop() throws EmptyGenericStackException  {
 		//구현
+		if(isEmpty()) {
+			throw new EmptyGenericStackException("pop : stack Empty");
+		}
+		return data.remove(data.size() - 1);
 	}
 
 //--- 스택에서 데이터를 피크(peek, 정상에 있는 데이터를 들여다봄) ---//
 	public Point2 peek() throws EmptyGenericStackException  {
 		//구현
+		if(isEmpty()) {
+			throw new EmptyGenericStackException("peek : stack Empty");
+		}
+		return data.get(data.size() - 1);
 	}
 
 //--- 스택을 비움 ---//
@@ -93,6 +108,12 @@ class objectStack{
 //--- 스택에서 x를 찾아 인덱스(없으면 –1)를 반환 ---//
 	public int indexOf(Point2 x) {
 		//구현
+		for(int i = top - 1; i >= 0; i--) {
+			if(data.get(i) == x) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 //--- 스택의 크기를 반환 ---//
@@ -118,9 +139,19 @@ class objectStack{
 //--- 스택 안의 모든 데이터를 바닥 → 꼭대기 순서로 출력 ---//
 	public void dump() {
 		//구현
+		if (isEmpty()) {
+			System.out.println("스택이 비어있습니다.");
+		}
+		else {
+			//추가할 부분
+			for(int i = 0; i < top; i++) {
+				System.out.println(data);
+			}
+			System.out.println();
+		}
 	}
 }
-public class 실습4_2_1객체스택 {
+public class train_실습4_2_2객체스택_리스트 {
 
 	public static void main(String[] args) {
 		Scanner stdIn = new Scanner(System.in);

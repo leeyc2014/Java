@@ -29,8 +29,8 @@ public class train_실습4_4_스택응용_괄호매칭검사 {
 		 * Map을 사용하지 않고 구현하기 
 		 */
 		// Map<Character, Character> pairs = *** // 사용 추천 "[ ]"을 map 쌍으로 정의
-		Map<Character, Character> bracketPairs = Map.of(// 키-값 쌍을 순서대로 받아서 Map 객체를 생성
-				')', '(', '}', '{', ']', '[', '>', '<');
+		//Map<Character, Character> bracketPairs = Map.of(// 키-값 쌍을 순서대로 받아서 Map 객체를 생성
+		//		')', '(', '}', '{', ']', '[', '>', '<');
 		/*
 		 * Stack<E>는 어떤 클래스인가? Java Collection Framework에 포함된 제네릭 클래스 내부적으로 Vector를 상속하고
 		 * 있음 (LIFO 구조)
@@ -45,13 +45,23 @@ public class train_실습4_4_스택응용_괄호매칭검사 {
 		 * 
 		 * 사용 목적: ch가 여는 괄호인지 확인
 		 */
-		for (char ch : s.toCharArray()) {
+		/*for (char ch : s.toCharArray()) {
 			if (bracketPairs.containsValue(ch)) { // 여는 괄호
 				stack.push(ch);
 			} else if (bracketPairs.containsKey(ch)) { // 닫는 괄호
 				if (stack.isEmpty() || stack.pop() != bracketPairs.get(ch)) {
 					return false; // 짝이 맞지 않음
 				}
+			}
+		}*/
+		for (char ch : s.toCharArray()) {
+			if (ch == '(' || ch == '{' || ch == '[' || ch == '<') { // 여는 괄호
+				stack.push(ch);
+			} else if (ch == ')' || ch == '}' || ch == ']' || ch == '>') { // 닫는 괄호
+				if (ch == ')' && stack.pop() != '(') return false;
+				if (ch == '}' && stack.pop() != '{') return false;
+				if (ch == ']' && stack.pop() != '[') return false;
+				if (ch == '>' && stack.pop() != '<') return false;
 			}
 		}
 		return stack.isEmpty(); // 모든 괄호가 닫혀 있어야 함

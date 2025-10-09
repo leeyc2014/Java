@@ -1,6 +1,3 @@
-package 자료구조ch04;
-
-public class train_실습4_5_작업대기시간_시뮬레이션 {
 	/*
 	문제 예시: timeslot 기반의 작업 scheduling 시스템
 	문제 설명:
@@ -31,4 +28,53 @@ public class train_실습4_5_작업대기시간_시뮬레이션 {
 	1 ≤ 작업의 개수 ≤ 100
 	각 작업의 남은 시간은 1 이상 100 이하입니다.
 	*/
+package 자료구조ch04;
+
+import java.util.Scanner;
+import java.util.Queue;
+import java.util.LinkedList;
+
+class Time {
+    String name;
+    int remainTime;
+
+    public Time(String name, int remainTime) {
+        this.name = name;
+        this.remainTime = remainTime;
+    }
+}
+
+public class train_실습4_5_작업대기시간_시뮬레이션 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("T: ");
+        int timeSlot = sc.nextInt();
+        sc.nextLine();
+        System.out.print("작업 이름,시간: ");
+        String[] input = sc.nextLine().split(",");
+        Queue<Time> queue = new LinkedList<>();
+        for (int i = 0; i < input.length; i += 2) {
+            String name = input[i];
+            int time = Integer.parseInt(input[i + 1]);
+            queue.offer(new Time(name, time));
+        }
+
+        int currentTime = 0;
+
+        while (!queue.isEmpty()) {
+            Time currentJob = queue.poll();
+
+            if (currentJob.remainTime > timeSlot) {
+                currentJob.remainTime -= timeSlot;
+                currentTime += timeSlot;
+                System.out.println(currentJob.name + " 처리, 남은 시간: " + currentJob.remainTime);
+                queue.offer(currentJob);
+            } else {
+                currentTime += currentJob.remainTime;
+                System.out.println(currentJob.name + " 작업 완료 at " + currentTime);
+            }
+        }
+        sc.close();
+    }
 }

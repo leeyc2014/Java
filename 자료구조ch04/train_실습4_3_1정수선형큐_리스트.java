@@ -42,17 +42,18 @@ public Queue4(int maxlen) {
 
 //--- 큐에 데이터를 인큐 ---//
 	public int enque(int x) throws OverflowQueueException {
-		//que.add()
+		que.add(x);
+		return x;
 	}
 
 //--- 큐에서 데이터를 디큐 ---//
 	public int deque() throws EmptyQueueException {
-		//que.remove()
+		return que.remove(que.size() - 1);
 	}
 
 //--- 큐에서 데이터를 피크(프런트 데이터를 들여다봄) ---//
 	public int peek() throws EmptyQueueException {
-		//que.get()
+		return que.get(que.size() - 1);
 	}
 
 //--- 큐를 비움 ---//
@@ -62,7 +63,9 @@ public Queue4(int maxlen) {
 
 //--- 큐에서 x를 검색하여 인덱스(찾지 못하면 –1)를 반환 ---//
 	public int indexOf(int x) {
-
+		for(int i = rear - 1; i >= 0 ;i--) {
+			
+		}
 	}
 
 //--- 큐의 크기를 반환 ---//
