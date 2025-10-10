@@ -64,8 +64,11 @@ public Queue4(int maxlen) {
 //--- 큐에서 x를 검색하여 인덱스(찾지 못하면 –1)를 반환 ---//
 	public int indexOf(int x) {
 		for(int i = rear - 1; i >= 0 ;i--) {
-			
+			if(que.get(i).equals(x)) {
+				return i;
+			}
 		}
+		return -1;
 	}
 
 //--- 큐의 크기를 반환 ---//
@@ -75,22 +78,29 @@ public Queue4(int maxlen) {
 
 //--- 큐에 쌓여 있는 데이터 개수를 반환 ---//
 	public int size() {
-
+		return que.size();
 	}
 
 //--- 큐가 비어있는가? ---//
 	public boolean isEmpty() {
-	
+		return que.size() <= 0;
 	}
 
 //--- 큐가 가득 찼는가? ---//
 	public boolean isFull() {
-
+		return que.size() >= capacity;
 	}
 
 //--- 큐 안의 모든 데이터를 프런트 → 리어 순으로 출력 ---//
 	public void dump() {
-		//que.get()
+			if(que.size() <= 0) {
+				System.out.println("queue is empty");
+			}
+			else {
+				for(int i = 0; i < que.size(); i++) {
+					System.out.print(que.get(i) + " ");
+			}
+		}
 	}
 }
 public class train_실습4_3_1정수선형큐_리스트 {
@@ -110,7 +120,7 @@ public class train_실습4_3_1정수선형큐_리스트 {
 				System.out.print("입력데이터: (" + rndx +")");
 				try {
 					oq.enque(rndx);
-				} catch(Chap4_스택과큐.Queue4.OverflowQueueException e) {
+				} catch(자료구조ch04.Queue4.OverflowQueueException e) {
 					System.out.println("stack이 가득찼있습니다.");
 				}
 				break;
@@ -119,7 +129,7 @@ public class train_실습4_3_1정수선형큐_리스트 {
 				try {
 					p = oq.deque();
 					System.out.println("디큐한 데이터는 " + p + "입니다.");
-				} catch (Chap4_스택과큐.Queue4.EmptyQueueException e) {
+				} catch (자료구조ch04.Queue4.EmptyQueueException e) {
 					System.out.println("큐가 비어 있습니다.");
 				}
 				break;
@@ -128,7 +138,7 @@ public class train_실습4_3_1정수선형큐_리스트 {
 				try {
 					p = oq.peek();
 					System.out.println("피크한 데이터는 " + p + "입니다.");
-				} catch (Chap4_스택과큐.Queue4.EmptyQueueException e) {
+				} catch (자료구조ch04.Queue4.EmptyQueueException e) {
 					System.out.println("큐가 비어 있습니다.");
 				}
 				break;

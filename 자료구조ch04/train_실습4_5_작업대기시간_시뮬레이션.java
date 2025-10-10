@@ -1,17 +1,19 @@
 	/*
 	문제 예시: timeslot 기반의 작업 scheduling 시스템
 	문제 설명:
-	어느 회사에서는 여러 작업이 동시에 들어오며, 각 작업의 처리 시간은 난수로 배정된다. 
-	각 작업은 주어진 time slot 단위로 나눠서 처리되며, 처리 중인 작업은 완료되지 않았더라도 
-	타임슬롯이 끝나면 큐의 마지막에 다시 대기해야 한다. 순서대로 돌아가며 타임슬롯을 할당하여 
-	작업을 처리하는 이 시스템에서, 작업이 끝나면 큐에서 제거되고 완료된 시간을 출력한다, 
+	어느 회사에서는 여러 작업이 동시에 들어오며, 
+	각 작업의 처리 시간은 난수로 배정된다. 
+	각 작업은 주어진 time slot 단위로 나눠서 처리되며, 
+	처리 중인 작업은 완료되지 않았더라도 타임슬롯이 끝나면 큐의 마지막에 다시 대기해야 한다. 
+	순서대로 돌아가며 타임슬롯을 할당하여 작업을 처리하는 이 시스템에서, 
+	작업이 끝나면 큐에서 제거되고 완료된 시간을 출력한다, 
 	그렇지 않으면 다음 타임슬롯에 다시 처리될 때까지 대기열의 끝으로 이동합니다.
 
 	조건:
 	각 작업에는 고유의 이름과 남은 작업 시간이 주어집니다.
-	타임슬롯(T)의 크기가 주어집니다.
-	각 작업은 타임슬롯 단위로 처리되며, 만약 작업이 완료되지 않으면 
-	남은 시간이 줄어들고 큐의 끝으로 이동합니다.
+	타임슬롯(T)의 크기가 주어집니다.(한 번에 처리할 수 있는 작업량)
+	각 작업은 타임슬롯 단위로 처리되며, 
+	만약 작업이 완료되지 않으면, 남은 시간이 줄어들고 큐의 끝으로 이동합니다.
 	작업이 완료되면 큐에서 제거됩니다.
 	모든 작업이 완료될 때까지 반복적으로 처리합니다.
 
@@ -32,49 +34,92 @@ package 자료구조ch04;
 
 import java.util.Scanner;
 import java.util.Queue;
-import java.util.LinkedList;
-
-class Time {
-    String name;
-    int remainTime;
-
-    public Time(String name, int remainTime) {
-        this.name = name;
-        this.remainTime = remainTime;
-    }
-}
 
 public class train_실습4_5_작업대기시간_시뮬레이션 {
+	static class Job {
+		String name;
+		int remainingTime;
+		
+		Job(String name, int remainingTime) {
+			this.name = name;
+			this.remainingTime = remainingTime;
+		}
+	}
+	static class Queue1 {
+		Job[] queue;
+		int front;
+		int rear;
+		int size;
+		int capacity;
+			
+		Queue1(int capacity) {
+			this.capacity = capacity;
+			this.queue = new Job[capacity];
+			this.front = 0;
+			this.size = 0;
+			this.rear = -1;
+		}
+		
+		boolean isEmpty() {
+			return size == 0;
+		}
+		
+		boolean isFull() {
+			return size == capacity;
+		}
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("T: ");
-        int timeSlot = sc.nextInt();
-        sc.nextLine();
-        System.out.print("작업 이름,시간: ");
-        String[] input = sc.nextLine().split(",");
-        Queue<Time> queue = new LinkedList<>();
-        for (int i = 0; i < input.length; i += 2) {
-            String name = input[i];
-            int time = Integer.parseInt(input[i + 1]);
-            queue.offer(new Time(name, time));
-        }
+		public void enque(Job job) {
+			if(isFull()) {
+				System.out.print("queue is full");
+				return;
+			}
+			rear = (rear + 1) % capacity;
+			queue[rear] = job;
+			size++;
+			if(rear == capacity) {
+				rear = 0;
+			}
+		}
+		
+		public Job deque() {		
+			if(isEmpty()) {
+				return null;
+			}
+			Job job = queue[front];
+			front = (front + 1) % capacity;
+			size--;
+			if(front == capacity) {
+				front = 0;
+			}			
+			return job;
+		}
+	}
 
-        int currentTime = 0;
-
-        while (!queue.isEmpty()) {
-            Time currentJob = queue.poll();
-
-            if (currentJob.remainTime > timeSlot) {
-                currentJob.remainTime -= timeSlot;
-                currentTime += timeSlot;
-                System.out.println(currentJob.name + " 처리, 남은 시간: " + currentJob.remainTime);
-                queue.offer(currentJob);
-            } else {
-                currentTime += currentJob.remainTime;
-                System.out.println(currentJob.name + " 작업 완료 at " + currentTime);
-            }
-        }
-        sc.close();
-    }
+	public static void main(String[] args) {
+		int timeslot = 3;
+		String[][] jobData = {
+				{"A", "10"},
+				{"B", "5"},
+				{"C", "8"}};
+		
+		Queue1 queue = new Queue1(100);
+		for(String[] data : jobData) {
+			queue.enque(new Job(data[0], Integer.parseInt(data[1])));
+		}
+		int currentTime = 0;
+		while(!queue.isEmpty()) {
+			Job currentJob = queue.deque();
+			int processTime = Math.min(timeslot, currentJob.remainingTime);
+			currentJob.remainingTime -= processTime;
+			currentTime += processTime;
+			System.out.println("처리 중: " + currentJob.name + ", 남은 시간: " + currentJob.remainingTime);
+			if(currentJob.remainingTime == 0) {
+				System.out.println(currentJob.name + " 완료, 시간: " + currentTime);
+			}
+			else {
+				queue.enque(currentJob);
+			}
+		}
+	}
 }
+

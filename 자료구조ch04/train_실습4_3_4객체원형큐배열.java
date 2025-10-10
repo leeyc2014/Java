@@ -1,4 +1,4 @@
-package Chap4_스택과큐;
+package 자료구조ch04;
 /*
  * 실습 6번: 원형 큐로서 큐에 Point 객체를 배열로 저장
  * 실습4_3_2 정수 원형 큐 배열을 객체 버젼으로 구현하는 것임
@@ -17,7 +17,7 @@ import java.util.Random;
 /*
  * 실습4_7번 
  * 원형 큐로서 큐에 Point 객체를 저장
- * class CircularQueue의 필드는 QUEUE_SIZE, que,	front, rear, isEmptyTag 변수만 사용
+ * class CircularQueue의 필드는 QUEUE_SIZE, que, front, rear, isEmptyTag 변수만 사용
  */
 
 import java.util.Random;
@@ -27,6 +27,14 @@ class Point5 {
 	private int ix;
 	private int iy;
 
+	public Point5(int ix, int iy) {
+		this.ix = ix;
+		this.iy = iy;
+	}
+	
+	public String toString() {
+		return "(" + ix + ", " + iy + ")";
+	}
 }
 
 
@@ -38,19 +46,29 @@ class CircularQueue {
 	//--- 실행시 예외: 큐가 비어있음 ---//
 		public class EmptyQueueException extends RuntimeException {
 //추가
+			public EmptyQueueException(String msg) {
+				super(msg);
+			}
 		}
 
 	//--- 실행시 예외: 큐가 가득 찼음 ---//
 		public class OverflowQueueException extends RuntimeException {
 //추가
+			public OverflowQueueException(String msg) {
+				super(msg);
+			}
 		}
 	public CircularQueue(int count) {
-
+		front = rear = 0;
+		isEmptyTag = false;
+		this.que = new Point5[count];
 	}
+	
 	void push(Point5 it) throws OverflowQueueException{
 		if(isFull()) {
-
+			throw new OverflowQueueException("queue is full");
 		}
+		rear = (rear + 1) % QUEUE_SIZE; 
 //추가
 	}
 
