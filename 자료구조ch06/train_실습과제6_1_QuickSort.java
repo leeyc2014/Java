@@ -2,7 +2,6 @@ package 자료구조ch06;
 
 import java.util.Stack;
 
-import 자료구조ch06.StackSorting.Stack3;
 //stack 1개를 사용한 non-recursve QuickSort() 구현
 
 class Point {
@@ -34,7 +33,7 @@ public class train_실습과제6_1_QuickSort {
 
 
 //퀵 정렬(비재귀 버전)
-
+	
 	// --- 배열 요소 a[idx1]와 a[idx2]의 값을 교환 ---//
 	static void swap(int[] a, int idx1, int idx2) {
 		int t = a[idx1];
@@ -48,8 +47,40 @@ public class train_실습과제6_1_QuickSort {
 
 		Point pt = new Point(left, right);
 		st.push(pt);
-
+		
+		while (!st.isEmpty()) {
+			 pt = st.pop();
+			 int pl = left = pt.getX();
+			 int pr = right = pt.getY();
+			 int pivot = a[(left + right) / 2];
+			 
+			 do {
+	             while (a[pl] < pivot) pl++;
+	             while (a[pr] > pivot) pr--;
+	             if (pl <= pr)
+	                 swap(a, pl++, pr--);
+	         } while (pl <= pr);
+	         showData(a);
+	         System.out.println("\npivot = " + pivot);
+	         
+	         if (left < pr) {
+	        	 pt = new Point(left, pr);
+	        	 st.push(pt);
+	        	 System.out.println("left = " + left + ", pr = " + pr);
+	         }
+	         if (pl < right) {
+	        	 pt = new Point(pl, right);
+	        	 st.push(pt);
+	        	 System.out.println("pl = " + pl + ", right = " + right);
+	         }
+		}
 	}
+	
+	static void showData(int[] d) {
+		 System.out.println();
+	     for (int i = 0; i < d.length; i++)
+	         System.out.print(d[i] + " ");
+	 }
 
 	public static void main(String[] args) {
 		int nx = 10;

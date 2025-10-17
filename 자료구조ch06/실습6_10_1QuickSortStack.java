@@ -13,12 +13,12 @@ public class 실습6_10_1QuickSortStack {
 
  //--- 퀵 정렬(비재귀 버전)---//
  static void quickSort(int[] a, int left, int right) {
-     /*IntStack lstack = new IntStack(right - left + 1);
+     IntStack lstack = new IntStack(right - left + 1);
      IntStack rstack = new IntStack(right - left + 1);
 
      lstack.push(left);
-     rstack.push(right);*/
-	 Stack<Point> st = new Stack<>();
+     rstack.push(right);
+	/* Stack<Point> st = new Stack<>();
 	 Point p = new Point(left, right);
 	 st.push(p);
 	 
@@ -26,13 +26,13 @@ public class 실습6_10_1QuickSortStack {
 		 p = st.pop();
 		 int pl = left = p.left;
 		 int pr = right = p.right;
-		 int x = a[(left + right) / 2];
+		 int x = a[(left + right) / 2];*/
 
-     /*while (!lstack.isEmpty()) {
+     while (!lstack.isEmpty()) {
          int pl = left  = lstack.pop();        // 왼쪽 커서
          int pr = right = rstack.pop();        // 오른쪽 커서
          int x = a[(left + right) / 2];        // 피벗은 가운데 요소
-*/
+         
          do {
              while (a[pl] < x) pl++;
              while (a[pr] > x) pr--;
@@ -42,18 +42,18 @@ public class 실습6_10_1QuickSortStack {
          showData(a);
          System.out.println();
          if (left < pr) {
-        	 p = new Point(left, pr);
-        	 st.push(p);
-        	 System.out.println("left = " + left + ", pr = " + pr);
-             // lstack.push(left);           // 왼쪽 그룹 범위의
-             // rstack.push(pr);             // 인덱스를 푸시
+        	 //p = new Point(left, pr);
+        	 //st.push(p);
+        	 //System.out.println("left = " + left + ", pr = " + pr);
+             lstack.push(left);           // 왼쪽 그룹 범위의
+             rstack.push(pr);             // 인덱스를 푸시
          }
          if (pl < right) {
-        	 p = new Point(right, pl);
-        	 st.push(p);
-        	 System.out.println("pl = " + pl + ", right = " + right);
-             // lstack.push(pl);             // 오른쪽 그룹 범위의
-             // rstack.push(right);          // 인덱스를 푸시
+        	 //p = new Point(right, pl);
+        	 //st.push(p);
+        	 //System.out.println("pl = " + pl + ", right = " + right);
+             lstack.push(pl);             // 오른쪽 그룹 범위의
+             rstack.push(right);          // 인덱스를 푸시
          }
      }
  }
@@ -62,6 +62,7 @@ public class 실습6_10_1QuickSortStack {
      for (int i = 0; i < d.length; i++)
          System.out.print(d[i] + " ");
  }
+ 
  public static void main(String[] args) {
      Scanner stdIn = new Scanner(System.in);
 
