@@ -25,29 +25,55 @@ class LinkedList1 {
 	{
 		Node1 q, current = first;
 		q = current;
-	
+		while(q != null) {
+			if(q.data == element) {
+				q.data = 0;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void Show() { // 전체 리스트를 순서대로 출력한다.
 		Node1 p = first;
 		int num = 0;
-
+		System.out.print("{");
+		while(p != null) {
+			System.out.print(p);
+			if() {
+				System.out.print(", ");
+			}
+			num++;
+		}
+		System.out.print("}");
 	}
 
 	public void Add(int element) // 임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
 	{
 		Node1 newNode = new Node1(element);
+		int temp = 0;
 		if (first == null) // insert into empty list
 		{
 			first = newNode;
 			return;
 		}
-
+		else {
+			if(first.data > newNode.data) {
+				temp = first.data;
+				first.data = newNode.data;
+				newNode.data = temp;
+			}
+		}
 	}
 
-	public boolean Search(int data) { 전달된 data 값을 찾아 존재하면 true로 리턴, 없으면 false로 리턴
+	public boolean Search(int data) { // 전달된 data 값을 찾아 존재하면 true로 리턴, 없으면 false로 리턴
 		Node1 ptr = first;
-
+		while(ptr != null) {
+			if(data == ptr.data) {
+				return true;
+			}
+			ptr = ptr.link;
+		}
 		return false;
 	}
 	void Merge(LinkedList1 b) {
@@ -61,7 +87,7 @@ class LinkedList1 {
 	}
 }
 
-public class 실습9_1정수연결리스트 {
+public class train_실습과제8_1정수연결리스트 {
 	enum Menu {
 		Add("삽입"), Delete("삭제"), Show("인쇄"), Search("검색"), Merge("합병"), Exit("종료");
 

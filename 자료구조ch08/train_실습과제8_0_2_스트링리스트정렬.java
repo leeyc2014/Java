@@ -40,41 +40,68 @@ public class train_실습과제8_0_2_스트링리스트정렬 {
 		String cities[] = new String[0];
 		cities = list.toArray(cities);
 		int count = cities.length;
-		for (int i = 0; i < count; i++)
-
-		return lst;
+		for (int i = 0; i < count; i++) {
+			if(list.get(i).compareTo(list.get(i + 1)) < 0) {
+				swap(list, i, i + 1);
+			}
+		}
+		return list;
 	}
 	static void swap(List<String> list, int i, int j) {
-
+		String temp = list.get(i);
+		list.set(i, list.get(j));
+		list.set(j, temp);
 	}
 	static void sortList2(List<String> list) {
 		//리스트 자체를 정렬
 		int listSize = list.size();
-
+	     for (int i = 0; i < listSize - 1; i++)//패스
+	         for (int j = listSize - 1; j > i; j--) {	//끝에서 앞쪽으로 이동하면서 버블 처리
+	             if (list.get(j - 1).compareTo(list.get(j)) > 0)//버블
+	                 swap(list, j - 1, j);
+	         }
 	}
 	static String[] removeDuplicateList(List<String> list) {
-		String cities[] = new String[0];//배열의 크기가 0인 배열
-		cities = list.toArray(cities);//list의 결과로서 배열의 크기를 잡은 후에 동적으로 배열의 크기를 정한다 
+		List<String> result = new ArrayList<>();
+		String cities[] = new String[0];	//배열의 크기가 0인 배열
+		cities = list.toArray(cities);		//list의 결과로서 배열의 크기를 잡은 후에 동적으로 배열의 크기를 정한다
 		int count = cities.length;
-		for (int i = 0; i< count; i++) {
-
+		for (int i = 0; i < count - 1; i++) {
+			if(i == 0 || list.get(i - 1).compareTo(list.get(i)) != 0) {
+				result.add(list.get(i));
+			}
 		}
-		// 대체 코드
-		/*
-		    int m = 0, n = 1;
-		    while (n < count) {
-		    	if (cities[m].compareTo(cities[n]) == 0) {
-		    		cities = removeElement1(cities, cities[m]);
-		    		count--;
-		    		continue;
-		    	}
-		    	m++; n++;
-
-		    }
-		 */
-		//
-		return cities;
+		String[] st = new String[result.size()];
+		
+		return result.toArray(st);
 	}
+	// 대체 코드
+			/*
+			    int m = 0, n = 1;
+			    while (n < count) {
+			    	if (cities[m].compareTo(cities[n]) == 0) {
+			    		cities = removeElement1(cities, cities[m]);
+			    		count--;
+			    		continue;
+			    	}
+			    	m++; n++;
+
+			    }
+			 */
+			//
+	private static void showList(String msg, List<String> list) {
+		int idx = 0;
+		System.out.print(msg + ": {");
+		for(String data : list) {
+			System.out.print(data);
+			if(idx < list.size() - 1) {
+				System.out.print(", ");
+			}
+			idx++;
+		}
+		System.out.print("}");
+	}
+	
 	public static void main(String[] args) {
 		ArrayList<String> list = new ArrayList<>();
 		getList(list);
