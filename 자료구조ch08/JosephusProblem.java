@@ -69,7 +69,17 @@ class singlyLinkedList {
 		Node newNode = new Node(id);
 	}
 	public void showList() {
-		
+		Node current = head;
+		System.out.print("{");
+		while(current != null) {
+			System.out.print(current.id);
+			if(current.next != null) {
+				System.out.print(", ");
+			}
+			current = current.next;
+		}
+		System.out.print("}");
+		System.out.println();
 	}
 }
 public class JosephusProblem {

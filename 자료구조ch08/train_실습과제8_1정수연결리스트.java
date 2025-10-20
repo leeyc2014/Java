@@ -17,52 +17,69 @@ class Node1 {
 class LinkedList1 {
 	Node1 first;
 
-	public LinkedList1() {
+	public LinkedList1() { 
 		first = null;
 	}
 
 	public boolean Delete(int element) //전달된 element 값이 존재 하면 삭제하고 true로 리턴
 	{
 		Node1 q, current = first;
-		q = current;
-		while(q != null) {
-			if(q.data == element) {
-				q.data = 0;
+		q = null;
+		while(current != null) {
+			if(current.data == element) {
+				if(q == null) {
+					first = current.link;
+				}
+				else {
+					q.link = current.link;
+				}
 				return true;
 			}
+			q = current;
+			current = current.link;
 		}
 		return false;
 	}
 
 	public void Show() { // 전체 리스트를 순서대로 출력한다.
 		Node1 p = first;
-		int num = 0;
 		System.out.print("{");
 		while(p != null) {
-			System.out.print(p);
-			if() {
+			System.out.print(p.data);
+			if(p.link != null) {
 				System.out.print(", ");
 			}
-			num++;
+			p = p.link;
 		}
 		System.out.print("}");
+		System.out.println();
 	}
 
 	public void Add(int element) // 임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
 	{
 		Node1 newNode = new Node1(element);
-		int temp = 0;
 		if (first == null) // insert into empty list
 		{
 			first = newNode;
 			return;
 		}
-		else {
-			if(first.data > newNode.data) {
-				temp = first.data;
-				first.data = newNode.data;
-				newNode.data = temp;
+		Node1 r = first;
+		while (r.link != null) {
+			r = r.link;
+		}
+		r.link = newNode;
+		Node1 i = first;
+		while(i != null) {
+			Node1 j = i.link;
+			while(j != null) {
+				if(i.data > j.data) {
+					int temp = i.data;
+					i.data = j.data;
+					j.data = temp;				
+				}
+				j = j.link;
 			}
+			i = i.link;
 		}
 	}
 
@@ -83,7 +100,18 @@ class LinkedList1 {
 		 * 난이도 등급: 최상
 		 * a = (3, 5, 7), b = (2,4,8,9)이면 a = (2,3,4,5,8,9)가 되도록 구현하는 코드
 		 */
-
+		// add 이용해서 a list에 b list의 data들 하나씩 더하기
+		// a list 다시 출력
+		while (b.first != null) {
+			this.Add(b.first.data);
+			b.first = b.first.link;
+		}
+		/* Node1 bn = b.first;
+		 * while(bn != null) {
+		 * 	 this.Add(bn.data);
+		 * 	 bn = bn.link;
+		 * }
+		 */
 	}
 }
 
@@ -156,6 +184,7 @@ public class train_실습과제8_1정수연결리스트 {
 				l.Show();
 				break;
 			case Search: //입력 숫자 n을 검색한다.
+				System.out.print("입력: ");
 				int n = sc.nextInt();
 				boolean result = l.Search(n);
 				if (!result)
