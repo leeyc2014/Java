@@ -80,7 +80,7 @@ class LinkedList2 {
 	public void Show() { // 전체 리스트를 순서대로 출력한다.
 		Node2 p = first;
 		SimpleObject5 so;
-
+		
 	}
 	public void Add(SimpleObject5 element, Comparator<SimpleObject5> cc) 
 	//임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다

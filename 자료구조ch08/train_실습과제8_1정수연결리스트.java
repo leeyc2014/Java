@@ -23,8 +23,8 @@ class LinkedList1 {
 
 	public boolean Delete(int element) //전달된 element 값이 존재 하면 삭제하고 true로 리턴
 	{
-		Node1 q, current = first;
-		q = null;
+		Node1 q = null;
+		Node1 current = first;
 		while(current != null) {
 			if(current.data == element) {
 				if(q == null) {
@@ -106,12 +106,12 @@ class LinkedList1 {
 			this.Add(b.first.data);
 			b.first = b.first.link;
 		}
-		/* Node1 bn = b.first;
-		 * while(bn != null) {
-		 * 	 this.Add(bn.data);
-		 * 	 bn = bn.link;
-		 * }
-		 */
+		/*Node1 bn = b.first;
+		 	 while(bn != null) {
+		  	 this.Add(bn.data);
+		 	 bn = bn.link;
+		}
+		*/
 	}
 }
 

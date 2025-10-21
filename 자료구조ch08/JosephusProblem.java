@@ -55,6 +55,11 @@ class Node {
 
 class singlyLinkedList {
 	Node head;
+	
+	public singlyLinkedList() {
+		head = null;
+	}
+	
 	public void insertSorted(int id) {
 		// head -> 3 -> 5 -> 8
 		// insertSorted(2)
@@ -66,8 +71,31 @@ class singlyLinkedList {
 		// 2) 새 head가 기존의 head 앞에 위치
 		// 3) 기존 head 뒤 어딘가에 위치
 		//
-		Node newNode = new Node(id);
+		Node newNode1 = new Node(id);
+		if (head == null)	{
+			head = newNode1;
+			return;
+		}		
+		Node r = head;
+		while (r.next != null) {
+			r = r.next;
+		}
+		r.next = newNode1;
+		Node i = head;
+		while(i != null) {
+			Node j = i.next;
+			while(j != null) {
+				if(i.id > j.id) {
+					int temp = i.id;
+					i.id = j.id;
+					j.id = temp;				
+				}
+				j = j.next;
+			}
+			i = i.next;
+		}
 	}
+	
 	public void showList() {
 		Node current = head;
 		System.out.print("{");
@@ -81,23 +109,44 @@ class singlyLinkedList {
 		System.out.print("}");
 		System.out.println();
 	}
+
+	public void deleteId(int k) {
+		Node current = head;
+		Node s = null;
+		int cnt = 0;
+		
+		while(current != null) {
+			current = current.next;
+			cnt++;
+			if(cnt == k) {
+				if(s == null) {
+					head = current.next;
+				}
+				else {
+					s.next = current.next;
+				}
+			}
+			s = current;
+		}
+	}
 }
 public class JosephusProblem {
-	public static void main() {
+	public static void main(String[] args) {
 		// 출력 : (7, 3)
-		System.out.print("Josephus (7, 3)");
 		// index / item (N개가 LinkedList(단방향)에 저장, K를 선택)
 		int n = 7;
 		int k = 3;
+		System.out.printf("Josephus (%d, %d)\n", n, k);
 		
 		Random rd = new Random(42);
 		singlyLinkedList sll = new singlyLinkedList();
 		for(int i = 0; i < n; i++) {
 			// id를 정렬해서 추가
-			int id = rd.nextInt(1000) + 1;
-			sll.insertSorted(id);
+			int data = rd.nextInt(1000) + 1;
+			sll.insertSorted(data);
 		}
 		sll.showList();
+		sll.deleteId(k);
 		// 제거 순서를 출력
 		/*item solve(K, N) {
 			
