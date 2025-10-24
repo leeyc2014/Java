@@ -109,7 +109,7 @@ class LinkedList2 {
 		 */
 	}
 }
-public class 실습9_2객체연결리스트 {
+public class train_실습과제8_2객체연결리스트 {
 
 	enum Menu {
 		Add( "삽입"), Delete( "삭제"), Show( "인쇄"), Search( "검색"), Merge("합병"), Exit( "종료");

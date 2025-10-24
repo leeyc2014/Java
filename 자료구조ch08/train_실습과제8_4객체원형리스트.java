@@ -112,7 +112,7 @@ class CircularList {
 
 		return false;
 	}
-	void Merge(CircularList2 b, Comparator<SimpleObject3> cc) {
+	void Merge(CircularList b, Comparator<SimpleObject3> cc) {
 		/*
 		 * 연결리스트 a,b에 대하여 a = a + b
 		 * merge하는 알고리즘 구현으로 in-place 방식으로 합병/이것은 새로운 노드를 만들지 않고 합병하는 알고리즘 구현
@@ -122,7 +122,7 @@ class CircularList {
 	}
 }
 
-public class 실습9_4객체원형리스트 {
+public class train_실습과제8_4객체원형리스트 {
 	enum Menu {
 		Add("삽입"), Delete("삭제"), Show("인쇄"), Search("검색"), Merge("합병"), Exit("종료");
 

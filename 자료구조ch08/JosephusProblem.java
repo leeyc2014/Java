@@ -60,6 +60,15 @@ class singlyLinkedList {
 		head = null;
 	}
 	
+	public void circularLinkedList() {
+		if(head == null)	return;
+		Node current = head;
+		while(current.next != null) {
+			current = current.next;
+		}
+		current.next = head;
+	}
+	
 	public void insertSorted(int id) {
 		// head -> 3 -> 5 -> 8
 		// insertSorted(2)
@@ -96,12 +105,13 @@ class singlyLinkedList {
 		}
 	}
 	
-	public void showList() {
+	public void showList(int n) {
+		if(head == null) return;
 		Node current = head;
 		System.out.print("{");
-		while(current != null) {
+		for(int i = 0; i < n; i++) {
 			System.out.print(current.id);
-			if(current.next != null) {
+			if(i < n - 1) {
 				System.out.print(", ");
 			}
 			current = current.next;
@@ -110,25 +120,27 @@ class singlyLinkedList {
 		System.out.println();
 	}
 
-	public void deleteId(int k) {
-		Node current = head;
-		Node s = null;
-		int cnt = 0;
-		
-		while(current != null) {
-			current = current.next;
-			cnt++;
-			if(cnt == k) {
-				if(s == null) {
-					head = current.next;
-				}
-				else {
-					s.next = current.next;
-				}
-			}
-			s = current;
+	public void deleteId(int k, int n) {
+		if(head == null) return;
+		Node tail = head;		
+		while(tail.next != head) {
+			tail = tail.next;
 		}
-	}
+		int cnt = n;
+		while(cnt > 1) {
+			for(int i = 1; i < k; i++) {
+				tail = head;
+				head = head.next;
+			}
+			System.out.println("제거된 ID: " + head.id);
+			tail.next = head.next;
+			head = tail.next;
+			cnt--;
+			System.out.print("제거 후 list: ");
+			showList(cnt);
+		}
+		System.out.println("남은 ID: " + head.id);
+	}		
 }
 public class JosephusProblem {
 	public static void main(String[] args) {
@@ -145,12 +157,13 @@ public class JosephusProblem {
 			int data = rd.nextInt(1000) + 1;
 			sll.insertSorted(data);
 		}
-		sll.showList();
-		sll.deleteId(k);
+		System.out.print("생성된 list: ");
+		sll.showList(n);
+		sll.circularLinkedList();
+		sll.deleteId(k, n);
 		// 제거 순서를 출력
 		/*item solve(K, N) {
 			
 		}*/
 	}
 }
-

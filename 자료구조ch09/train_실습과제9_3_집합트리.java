@@ -15,7 +15,7 @@ class Sets3 {
         Arrays.fill(parent, -1);  // Initialize with -1
     }
     void displaySets() {
-    	//{1,2,3} 등으로 set을 표시하기
+    	//{1,2,3} 등으로 set을 표시하기(root를 기준으로 집합 나누기)
 
     }
     public void display() {
