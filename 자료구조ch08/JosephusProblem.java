@@ -43,6 +43,7 @@ Stack / Queue / LinkedList
 */
 
 import java.util.Random;
+import java.util.Scanner;
 
 class Node {
 	int id;
@@ -53,20 +54,11 @@ class Node {
 	}
 }
 
-class singlyLinkedList {
+class circularLinkedList {
 	Node head;
 	
-	public singlyLinkedList() {
+	public circularLinkedList() {
 		head = null;
-	}
-	
-	public void circularLinkedList() {
-		if(head == null)	return;
-		Node current = head;
-		while(current.next != null) {
-			current = current.next;
-		}
-		current.next = head;
 	}
 	
 	public void insertSorted(int id) {
@@ -80,20 +72,24 @@ class singlyLinkedList {
 		// 2) 새 head가 기존의 head 앞에 위치
 		// 3) 기존 head 뒤 어딘가에 위치
 		//
+		
 		Node newNode1 = new Node(id);
 		if (head == null)	{
 			head = newNode1;
+			head.next = head;
 			return;
 		}		
 		Node r = head;
-		while (r.next != null) {
+		while (r.next != head) {
 			r = r.next;
 		}
 		r.next = newNode1;
+		newNode1.next = head;
 		Node i = head;
-		while(i != null) {
+		
+		while(i.next != head) {
 			Node j = i.next;
-			while(j != null) {
+			while(j != head) {
 				if(i.id > j.id) {
 					int temp = i.id;
 					i.id = j.id;
@@ -146,12 +142,16 @@ public class JosephusProblem {
 	public static void main(String[] args) {
 		// 출력 : (7, 3)
 		// index / item (N개가 LinkedList(단방향)에 저장, K를 선택)
-		int n = 7;
-		int k = 3;
+		int n, k;
+		Scanner sc = new Scanner(System.in);
+		System.out.print("n: ");
+		n = sc.nextInt();
+		System.out.print("k: ");
+		k = sc.nextInt();
 		System.out.printf("Josephus (%d, %d)\n", n, k);
 		
-		Random rd = new Random(42);
-		singlyLinkedList sll = new singlyLinkedList();
+		Random rd = new Random();
+		circularLinkedList sll = new circularLinkedList();
 		for(int i = 0; i < n; i++) {
 			// id를 정렬해서 추가
 			int data = rd.nextInt(1000) + 1;
@@ -159,7 +159,6 @@ public class JosephusProblem {
 		}
 		System.out.print("생성된 list: ");
 		sll.showList(n);
-		sll.circularLinkedList();
 		sll.deleteId(k, n);
 		// 제거 순서를 출력
 		/*item solve(K, N) {
