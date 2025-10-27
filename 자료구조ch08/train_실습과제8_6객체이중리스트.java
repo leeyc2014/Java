@@ -77,7 +77,8 @@ class DoubledLinkedList2 {
 	// --- 생성자(constructor) ---//
 	public DoubledLinkedList2() {
 		first = new Node4(); // dummy(first) 노드를 생성
-
+		first.llink = first;
+		first.rlink = first;
 	}
 
 	// --- 리스트가 비어있는가? ---//
@@ -92,13 +93,38 @@ class DoubledLinkedList2 {
 
 	// --- 전체 노드 표시 ---//
 	public void show() {
-
+		Node4 ptr = first.rlink;
+		if(isEmpty()) {
+			System.out.println("list is empty");
+			return;
+		}
+		System.out.print(" 리스트 내용: ");
+		while(ptr != first) {
+			System.out.print(ptr.data + " -> ");
+			ptr = ptr.rlink;
+		}
+		System.out.print("처음으로");
 	}
 
 	// --- 올림차순으로 정렬이 되도록 insert ---//
 	public void add(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
+		Node4 newNode = new Node4();
+		newNode.data = obj;
 
-
+		Node4 ptr = first.rlink;
+		Node4 prev = first;
+		
+		// 추가되는 위치 찾기(오름차순 정렬 유지)
+		while(ptr != null && c.compare(ptr.data, obj) < 0) {
+			prev = ptr;
+			ptr = ptr.rlink;
+		}
+		
+		// newNode를 prev와 ptr 사이에 추가
+		newNode.rlink = ptr;
+		newNode.llink = prev;
+		prev.rlink = newNode;
+		ptr.llink = newNode;
 	}
 
 	// --- list에 삭제할 데이터가 있으면 해당 노드를 삭제 ---//
@@ -132,7 +158,7 @@ class DoubledLinkedList2 {
 }
 
 public class train_실습과제8_6객체이중리스트 {
-	enum Menu {
+	/*enum Menu {
 		Add("삽입"), Delete("삭제"), Show("인쇄"), Search("검색"), Merge_NewList("병합-새리스트"), Merge_InPlace("병합-제자리"), Exit("종료");
 
 		private final String message; // 표시할 문자열
@@ -167,13 +193,19 @@ public class train_실습과제8_6객체이중리스트 {
 			key = sc1.nextInt();
 		} while (key < Menu.Add.ordinal() || key > Menu.Exit.ordinal());
 		return Menu.MenuAt(key);
-	}
+	}*/
 
 	public static void main(String[] args) {
-		Menu menu; // 메뉴
+		DoubledLinkedList2 lst1 = new DoubledLinkedList2();	
+		DoubledLinkedList2 lst2 = new DoubledLinkedList2();
+		DoubledLinkedList2 lst3 = new DoubledLinkedList2();
+		DoubledLinkedList2 lst4 = new DoubledLinkedList2();
+		
+		SimpleObject2 simpleObject2 = new SimpleObject2();
+		
+		/*Menu menu; // 메뉴
 		Scanner sc2 = new Scanner(System.in);
-		DoubledLinkedList2 lst1 = new DoubledLinkedList2(),	lst2 = new DoubledLinkedList2();
-		DoubledLinkedList2 lst3 = new DoubledLinkedList2(), lst4 = new DoubledLinkedList2();
+		
 		String sno1 = null, sname1 = null;
 		SimpleObject2 so;
 		boolean result = false;
@@ -246,7 +278,8 @@ public class train_실습과제8_6객체이중리스트 {
 			case Exit: // 
 				break;
 			}
-		} while (menu != Menu.Exit);
+		} while (menu != Menu.Exit);*/
+		
 	}
 	static void makeSimpleObjects(SimpleObject2 []simpleobjects) {
         simpleobjects[0] = new SimpleObject2("s8", "hong", "240618");

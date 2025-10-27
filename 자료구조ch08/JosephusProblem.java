@@ -85,8 +85,8 @@ class circularLinkedList {
 		}
 		r.next = newNode1;
 		newNode1.next = head;
-		Node i = head;
 		
+		Node i = head;	
 		while(i.next != head) {
 			Node j = i.next;
 			while(j != head) {

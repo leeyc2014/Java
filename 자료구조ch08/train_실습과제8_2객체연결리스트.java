@@ -19,7 +19,8 @@ class SimpleObject5 {
 		return "(" + no + ") " + name;
 	}
 	public SimpleObject5() {
-		no = null;name = null;
+		no = null;
+		name = null;
 	}
 	// --- 데이터를 읽어 들임 ---//
 	void scanData(String guide, int sw) {//sw가 3이면 11 비트 연산 >  NO, NAME을 모두 입력받는다 
@@ -54,6 +55,7 @@ class SimpleObject5 {
 		}
 	}
 }
+
 class Node2 {
 	SimpleObject5 data;
 	Node2 link;
@@ -72,16 +74,37 @@ class LinkedList2 {
 	public int Delete(SimpleObject5 element, Comparator<SimpleObject5> cc)
 	//전달된 element를 찾을 때 comparator 객체를 사용한다 
 	{
-		Node2 q, current = first;
-		q = current;
+		Node2 q = null;
+		Node2 current = first;
+		while(current != null) {
+			if(cc.compare(element, current.data) == 0) {
+				if(q == null) {
+					first = current.link;
+				}
+				else {
+					q.link = current.link;
+				}
+				return 1;
+			}
+			q = current;
+			current = current.link;
+		}
 
 		return -1;// 삭제할 대상이 없다.
 	}
+	
 	public void Show() { // 전체 리스트를 순서대로 출력한다.
 		Node2 p = first;
-		SimpleObject5 so;
-		
+		while(p != null) {
+			System.out.print(p.data);
+			if(p.link != null) {
+				System.out.print(",\t");
+			}
+			p = p.link;
+		}
+		System.out.println();
 	}
+	
 	public void Add(SimpleObject5 element, Comparator<SimpleObject5> cc) 
 	//임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
 	{
@@ -91,15 +114,41 @@ class LinkedList2 {
 			first = newNode;
 			return;
 		}
-
+		Node2 current = first;
+		while (current.link != null) {
+			current = current.link;
+		}
+		current.link = newNode;
+		
+		Node2 x = first;
+		while(x != null) {
+			Node2 y = x.link;
+			while(y != null) {
+				if(cc.compare(x.data, y.data) > 0) {
+					SimpleObject5 temp = x.data;
+					x.data = y.data;
+					y.data = temp;				
+				}
+				y = y.link;
+			}
+			x = x.link;
+		}
 	}
+	
 	public boolean Search(SimpleObject5 element, Comparator<SimpleObject5> cc) { 
 		// 전체 리스트를 올림차순 순서대로 출력한다.
 		Node2 q, current = first;
 		q = current;
+		while(q != null) {
+			if(cc.compare(element, q.data) == 0) {
+				return true;
+			}
+			q = q.link;
+		}
 
 		return false;
 	}
+	
 	void Merge(LinkedList2 b, Comparator<SimpleObject5> cc) {
 		/*
 		 * 연결리스트 a,b에 대하여 a = a + b
@@ -107,8 +156,13 @@ class LinkedList2 {
 		 * 난이도 등급: 최상급
 		 * 회원번호에 대하여 a = (3, 5, 7), b = (2,4,8,9)이면 a = (2,3,4,5,8,9)가 되도록 구현하는 코드
 		 */
+		while(b.first != null) {
+			Add(b.first.data, SimpleObject5.NO_ORDER);
+			b.first = b.first.link;
+		}
 	}
 }
+
 public class train_실습과제8_2객체연결리스트 {
 
 	enum Menu {
