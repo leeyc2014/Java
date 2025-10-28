@@ -270,17 +270,99 @@ class Tree4 {
 	public boolean add(SimpleObject4 obj, Comparator<? super SimpleObject4> c) {
 		//inorder로 출력시에 정렬이 되도록 입력: binary search tree를 구현
 		// left subtree < x < right subtree
+		TreeNode4 newNode = new TreeNode4(obj);
+		if(root == null) {
+			root = newNode;
+			return true;
+		}
 		TreeNode4 p = root;
 		TreeNode4 q = null;
-
+		while(p != null) {
+			q = p;
+			int cond = c.compare(obj, p.data);
+			if(cond < 0) {
+				p = p.LeftChild;
+			}
+			else if(cond > 0) {
+				p = p.RightChild;
+			}
+			else {
+				return false;	// 중복 데이터 허용하지 않음
+			}
+		}
+		
+		int cond = c.compare(obj, q.data);
+		if(cond < 0) {
+			q.LeftChild = newNode;
+		}
+		else if(cond > 0) {
+			q.RightChild = newNode;
+		}
+		else {
+			return false;
+		}
+		return false;
 	}
 
 	public boolean delete(SimpleObject4 obj, Comparator<? super SimpleObject4> c) {
 		//주어진 객체 obj를 포함한 노드를 찾아 삭제하는 알고리즘
 		//난이도: 최상급 중에서 최상급
 		TreeNode4 p = root, q = null;
+		TreeNode4 parent = null;
+		
+		while(p != null) {
+			int cond = c.compare(obj, p.data);
+			if(cond == 0) {
+				break;
+			}
+			parent = p;
+			if(cond < 0) {
+				p = p.LeftChild;
+			}
+			else {
+				p = p.RightChild;
+			}
+		}
+		
+		if(p == null) {
+			return false;	// 데이터 없음
+		}
+		
+		// Case1. Leaf가 없음
+		if(p.LeftChild == null && p.RightChild == null) {
+			if(p == root) {
+				root = null;
+			}
+			else if(parent.LeftChild == p) {
+				parent.LeftChild = null;
+			}
+			else {
+				parent.RightChild = null;
+			}
+		}
+		// Case2. Leaf가 1개
+		else if(p.LeftChild == null || p.RightChild == null) {
+			TreeNode4 child = (p.LeftChild != null) ? p.LeftChild : p.RightChild;
+			if(p == root) {
+				root = child;
+			}
+			else if(parent.LeftChild == p) {
+				parent.LeftChild = child;
+			}
+			else {
+				parent.RightChild = child;
+			}
+		}
+		// Case3. Leaf가 2개
+		else {
+			// inorder successor 찾기(오른쪽 서브트리의 최솟값)
+			TreeNode4 succ = inorderSucc(p);
+			SimpleObject4 succData = succ.data;
+			delete(succData, c);	// 재귀
+			p.data = succ.data;
+		}
 
-
+		return false;
 	}
 
 	boolean search(SimpleObject4 obj, Comparator<? super SimpleObject4> c) {

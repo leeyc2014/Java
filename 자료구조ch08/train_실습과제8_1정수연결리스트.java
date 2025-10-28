@@ -103,7 +103,7 @@ class LinkedList1 {
 		// add 이용해서 a list에 b list의 data들 하나씩 더하기
 		// a list 다시 출력
 		while (b.first != null) {
-			this.Add(b.first.data);
+			Add(b.first.data);
 			b.first = b.first.link;
 		}
 		/*Node1 bn = b.first;

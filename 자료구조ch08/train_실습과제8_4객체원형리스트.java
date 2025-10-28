@@ -15,8 +15,9 @@ class SimpleObject3 {
 
 	private String no; // 회원번호
 	private String name; // 이름
-	String expire;//  유효기간 필드를 추가
+	String expire;// 유효기간 필드를 추가
 	// --- 문자열 표현을 반환 ---//
+
 	public String toString() {
 		return "(" + no + ") " + name;
 	}
@@ -25,10 +26,12 @@ class SimpleObject3 {
 		this.no = no;
 		this.name = name;
 	}
+
 	public SimpleObject3() {// head node를 만들 때 사용
 		this.no = null;
 		this.name = null;
 	}
+
 	// --- 데이터를 읽어 들임 ---//
 	void scanData(String guide, int sw) {
 		Scanner sc = new Scanner(System.in);
@@ -76,7 +79,7 @@ class Node3 {
 class CircularList {
 	Node3 first;
 
-	public CircularList() { //head node
+	public CircularList() { // head node
 		SimpleObject3 data = new SimpleObject3();
 		first = new Node3(data);
 		first.link = first;
@@ -91,13 +94,12 @@ class CircularList {
 	{
 		Node3 q, current = first.link;
 		q = first;
-		if(cc.compare(element, current.data) == 0) {
-			if(first.link == first) {
+		if (cc.compare(element, current.data) == 0) {
+			if (first.link == first) {
 				first = null;
-			}
-			else {
+			} else {
 				Node3 tail = first;
-				while(tail.link != first) {
+				while (tail.link != first) {
 					tail = tail.link;
 				}
 				first = first.link;
@@ -105,9 +107,9 @@ class CircularList {
 			}
 			return 1;
 		}
-		
-		while(current != first) {
-			if(cc.compare(element, current.data) == 0) {
+
+		while (current != first) {
+			if (cc.compare(element, current.data) == 0) {
 				q.link = current.link;
 				return 1;
 			}
@@ -119,14 +121,14 @@ class CircularList {
 
 	public void Show() { // 전체 리스트를 순서대로 출력한다.
 		Node3 p = first.link;
-		while(p != first) {
+		while (p != first) {
 			System.out.print(p.data);
-			if(p.link != first) {
+			if (p.link != first) {
 				System.out.print(",\t");
 			}
 			p = p.link;
 		}
-		System.out.println();	
+		System.out.println();
 	}
 
 	public void Add(SimpleObject3 element, Comparator<SimpleObject3> cc) // 임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
@@ -134,34 +136,96 @@ class CircularList {
 		Node3 newNode = new Node3(element);
 		Node3 current = first.link;
 		Node3 prev = first;
-		
-		while(current != first && cc.compare(current.data, element) < 0) {
+
+		while (current != first && cc.compare(current.data, element) < 0) {
 			prev = current;
 			current = current.link;
 		}
 		prev.link = newNode;
-	    newNode.link = current;
+		newNode.link = current;
 	}
 
 	public boolean Search(SimpleObject3 element, Comparator<SimpleObject3> cc) { // 전체 리스트를 순서대로 출력한다.
 		Node3 current = first.link;
-		while(current != first) {
-			if(cc.compare(element, current.data) == 0) {
+		while (current != first) {
+			if (cc.compare(element, current.data) == 0) {
 				return true;
 			}
 			current = current.link;
 		}
 		return false;
 	}
-	
+
 	void Merge(CircularList b, Comparator<SimpleObject3> cc) {
-		/*
-		 * 연결리스트 a,b에 대하여 a = a + b
-		 * merge하는 알고리즘 구현으로 in-place 방식으로 합병/이것은 새로운 노드를 만들지 않고 합병하는 알고리즘 구현
-		 * 난이도 등급: 최상급
-		 * 회원번호에 대하여 a = (3, 5, 7), b = (2,4,8,9)이면 a = (2,3,4,5,8,9)가 되도록 구현하는 코드
-		 */
+		if(first == null || first.link == first) {
+			return;
+		}
 		
+		if(b.first == null || b.first.link == b.first) {
+			return;
+		}
+		
+		// 연결리스트 a,b에 대하여 a = a + b merge하는 알고리즘 구현으로 in-place 방식으로 합병/이것은 새로운 노드를 만들지
+		// 않고 합병하는 알고리즘 구현 난이도 등급: 최상급 회원번호에 대하여 a = (3, 5, 7), b = (2,4,8,9)이면 a =
+		// (2,3,4,5,8,9)가 되도록 구현하는 코드
+		 
+		// 1. 입력한 CircularList와 b의 원형을 끊고 SingularLinkedList로 만든다.
+		// 2. 두 리스트를 병합
+		// 3. 병합 후 head 재설정
+		// 4. tail 정의 후 정렬
+		// 5. 정렬된 list의 head를 다시 설정 후 원형 리스트로 다시 연결
+		Node3 tail1 = first.link;
+		while (tail1.link != first) {
+			tail1 = tail1.link;
+		}
+		tail1.link = null;
+
+		Node3 tail2 = b.first.link;
+		while (tail2.link != b.first) {
+			tail2 = tail2.link;
+		}
+		tail2.link = null;
+
+		Node3 x = first.link;
+		Node3 y = b.first.link;
+		Node3 head;
+		if (x == null || y == null || x.data == null || y.data == null) {
+		    return;
+		}
+		if (cc.compare(x.data, y.data) <= 0) {		// 이 부분에서 Exception in thread "main" java.lang.NullPointerException: 
+			head = x;								// Cannot invoke "String.compareTo(String)" because "d1.no" is null
+			x = x.link;
+		}
+		else {
+			head = y;
+			y = y.link;
+		}
+		
+		Node3 tail = head;
+		while(x != null && y != null) {
+			if(cc.compare(x.data, y.data) <= 0) {
+				tail.link = x;
+				x = x.link;
+			}
+			else {
+				tail.link = y;
+				y = y.link;
+			}
+			tail = tail.link;
+		}
+		
+		if(x != null) {
+			tail.link = x;
+		}
+		else if(y != null) {
+			tail.link = y;
+		}
+		
+		while(tail.link != null) {
+			tail = tail.link;
+		}
+		tail.link = head;
+		first = tail.link;
 	}
 }
 
@@ -209,7 +273,7 @@ public class train_실습과제8_4객체원형리스트 {
 		CircularList l2 = new CircularList();
 		Scanner sc = new Scanner(System.in);
 		SimpleObject3 data;
-		int count = 3;//l2 객체의 숫자를 3개로 한다 
+		int count = 3;// l2 객체의 숫자를 3개로 한다
 
 		do {
 			switch (menu = SelectMenu()) {
@@ -218,13 +282,13 @@ public class train_실습과제8_4객체원형리스트 {
 				data.scanData("입력", 3);
 				l.Add(data, SimpleObject3.NO_ORDER);
 				break;
-			case Delete: // 
+			case Delete: //
 				data = new SimpleObject3();
 				data.scanData("삭제", SimpleObject3.NO);
 				int num = l.Delete(data, SimpleObject3.NO_ORDER);
 				System.out.println("삭제된 데이터 성공은 " + num);
 				break;
-			case Show: 
+			case Show:
 				l.Show();
 				break;
 			case Search: // 회원 번호 검색
@@ -237,17 +301,17 @@ public class train_실습과제8_4객체원형리스트 {
 					System.out.println("검색 실패 = " + result);
 				break;
 			case Merge:
-				for (int i = 0; i < count; i++) {//3개의 객체를 연속으로 입력받아 l2 객체를 만든다 
+				for (int i = 0; i < count; i++) {// 3개의 객체를 연속으로 입력받아 l2 객체를 만든다
 					data = new SimpleObject3();
 					data.scanData("병합", 3);
-					l2.Add(data, SimpleObject3.NO_ORDER);				
+					l2.Add(data, SimpleObject3.NO_ORDER);
 				}
 				System.out.println("리스트 l::");
 				l.Show();
 				System.out.println("리스트 l2::");
 				l2.Show();
 				l.Merge(l2, SimpleObject3.NO_ORDER);
-				//merge 실행후 show로 결과 확인 - 새로운 노드를 만들지 않고 합병 - 난이도 상
+				// merge 실행후 show로 결과 확인 - 새로운 노드를 만들지 않고 합병 - 난이도 상
 				System.out.println("병합 리스트 l::");
 				l.Show();
 			case Exit: // 꼬리 노드 삭제

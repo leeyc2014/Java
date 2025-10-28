@@ -88,7 +88,17 @@ class DoubledLinkedList2 {
 
 	// --- 노드를 검색 ---//
 	public boolean search(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
-
+		// 첫 번째 노드부터 검색(first를 만나면 검색 종료)
+		// 만약 찾는 데이터가 있으면 => true 반환 => 메서드 종료
+		Node4 ptr = first.rlink;
+		while(ptr != first) {
+			if(c.compare(ptr.data, obj) == 0) {
+				System.out.println("검색 성공 " + ptr.data);
+				return true;
+			}
+			ptr = ptr.rlink;
+		}		
+		return false;
 	}
 
 	// --- 전체 노드 표시 ---//
@@ -129,19 +139,31 @@ class DoubledLinkedList2 {
 
 	// --- list에 삭제할 데이터가 있으면 해당 노드를 삭제 ---//
 	public void delete(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
-
+		Node4 ptr = first.rlink;
+		while(ptr != first) {
+			if(c.compare(ptr.data, obj) == 0) {
+				// 삭제 코드
+				// ptr.rlink, ptr.llink => 보존
+				ptr.llink.rlink = ptr.rlink;
+				ptr.rlink.llink = ptr.llink;
+				
+				System.out.println("삭제 완료 " + ptr.data);
+				return;
+			}
+			ptr = ptr.rlink;
+		}	
+		System.out.println("삭제할 데이터를 찾지 못했습니다.");
 	}
+	
 	public DoubledLinkedList2 merge_NewList(DoubledLinkedList2 lst2, Comparator<SimpleObject2> cc) {
 		//l3 = l1.merge(l2); 실행하도록 리턴 값이 리스트임 
 		//l.add(객체)를 사용하여 구현
 		//기존 리스트의 노드를 변경하지 않고 새로운 리스트의 노드들을 생성하여 구현 
 		DoubledLinkedList2 lst3 = new DoubledLinkedList2();
 		Node4 ai = this.first.rlink, bi = lst2.first.rlink;
-
-
-
+		// 병합 정렬 활용
+		
 		return lst3;
-
 	}
 	void merge_InPlace(DoubledLinkedList2 b, Comparator<SimpleObject2> cc) {
 		/*
@@ -150,10 +172,40 @@ class DoubledLinkedList2 {
 		 * 난이도 등급: 최상급
 		 * 회원번호에 대하여 a = (3, 5, 7), b = (2,4,8,9)이면 a = (2,3,4,5,8,9)가 되도록 구현하는 코드
 		 */
+		if(b.isEmpty()) return;
 		Node4 p = first.rlink, q = b.first.rlink;
+		Node4 prevP = first;
 		Node4 temp = null;
-
-
+		while(p != first && q != b.first) {
+			if(cc.compare(p.data, q.data) <= 0) {	// p가 q보다 작거나 같으면 p는 그대로 두고 다음으로 진행
+				prevP = p;
+				p = p.rlink;
+			}
+			else {		// q를 p 앞에 추가
+				temp = q.rlink;
+				// b 리스트에서 q 제거
+				q.llink.rlink = q.rlink;
+				q.rlink.llink = q.llink;
+				// this 리스트의 prevP와 p 사이에 q를 추가
+				q.llink = prevP;
+				q.rlink = p;
+				prevP.rlink = q;
+				p.llink = q;
+				
+				prevP = q;
+				q = temp;
+			}
+		}
+		if(q != b.first) {
+			prevP.rlink = q;
+			q.llink = prevP;
+			
+			Node4 lastB = b.first.llink;
+			lastB.rlink = first;
+			first.llink = lastB;
+		}
+		b.first.rlink = b.first;	// b 리스트 초기화
+		b.first.llink = b.first;
 	}
 }
 
@@ -200,9 +252,53 @@ public class train_실습과제8_6객체이중리스트 {
 		DoubledLinkedList2 lst2 = new DoubledLinkedList2();
 		DoubledLinkedList2 lst3 = new DoubledLinkedList2();
 		DoubledLinkedList2 lst4 = new DoubledLinkedList2();
+		System.out.println("1. 리스트 입력");
+		SimpleObject2 [] simpleObject = new SimpleObject2[10];
+		makeSimpleObjects(simpleObject);
+		for(int i = 0; i < simpleObject.length; i++) {
+			lst1.add(simpleObject[i], SimpleObject2.NO_ORDER);
+		}
 		
-		SimpleObject2 simpleObject2 = new SimpleObject2();
+		SimpleObject2 [] simpleObject2 = new SimpleObject2[10];
+		makeSimpleObjects2(simpleObject2);
+		for(int i = 0; i < simpleObject2.length; i++) {
+			lst2.add(simpleObject2[i], SimpleObject2.NO_ORDER);
+		}
 		
+		System.out.println("2. 리스트 출력");
+		lst1.show();
+
+		System.out.println("3. 리스트 검색");
+		SimpleObject2 searchObj1 = new SimpleObject2("s5", "jo", "240615");
+		System.out.println("+ 검색할 데이터: " + searchObj1);
+		boolean result1 = lst1.search(searchObj1, SimpleObject2.NO_ORDER);
+		if(!result1) {
+			System.out.println("데이터가 없습니다.");
+		}
+		else {
+			System.out.println("데이터가 존재합니다.");
+		}
+		
+		SimpleObject2 searchObj2 = new SimpleObject2("s99", "unknown", null);
+		System.out.println("+ 검색할 데이터: " + searchObj2);
+		boolean result2 = lst1.search(searchObj2, SimpleObject2.NO_ORDER);
+		if(!result2) {
+			System.out.println("데이터가 없습니다.");
+		}
+		else {
+			System.out.println("데이터가 존재합니다.");
+		}
+		
+		System.out.println("4. 리스트 삭제");
+		SimpleObject2 searchObj3 = new SimpleObject2("s5", null, null);
+		System.out.println("+ 삭제할 데이터 " + searchObj3);
+		lst1.delete(searchObj3, SimpleObject2.NO_ORDER);
+		lst1.show();
+		
+		System.out.println("5. 리스트 병합");	
+		lst1.merge_InPlace(lst2, SimpleObject2.NO_ORDER);
+		lst1.show();
+				
 		/*Menu menu; // 메뉴
 		Scanner sc2 = new Scanner(System.in);
 		
