@@ -114,6 +114,7 @@ class DoubledLinkedList2 {
 			ptr = ptr.rlink;
 		}
 		System.out.print("처음으로");
+		System.out.println();
 	}
 
 	// --- 올림차순으로 정렬이 되도록 insert ---//
@@ -125,7 +126,7 @@ class DoubledLinkedList2 {
 		Node4 prev = first;
 		
 		// 추가되는 위치 찾기(오름차순 정렬 유지)
-		while(ptr != null && c.compare(ptr.data, obj) < 0) {
+		while(ptr != first && c.compare(ptr.data, obj) < 0) {
 			prev = ptr;
 			ptr = ptr.rlink;
 		}

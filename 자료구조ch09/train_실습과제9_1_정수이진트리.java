@@ -1,18 +1,10 @@
 package 자료구조ch09;
 
-/*
- * 9장 tree
- * 1. 난수를 생성하여 binary search tree를 만든다 - insert()함수: 삽입되는 x가 root보다 작으면 left, 크면 right child로 이동
- * 2. 임의 숫자 x를 delete: x가 leaf node, one child node, two child nodes를 가질 수 있다
- * 3. stack을 이용한  non-recursive inorder 알고리즘
- * 4. queue를 사용한 level order 알고리즘의 구현
- */
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Stack;
 
 class TreeNode5 {
 	TreeNode5 LeftChild;
@@ -154,7 +146,7 @@ class Tree5 {
 	}
 
 	boolean isLeafNode(TreeNode5 current) {// current 가 leaf node 인지 조사(LeftChild와 RightChild가 모두 null)
-
+		return false;
 	}
 
 	void inorder() {// main에서 호출되는 driver function
@@ -201,7 +193,7 @@ class Tree5 {
 	// stack을 사용한 inorder 출력
 	// non-recursive 코드를 이해하는 학습 필요
 	{
-		ObjectStack5 s = new ObjectStack5(20);
+		Stack<TreeNode5> s = new Stack<>();
 		TreeNode5 CurrentNode = root;
 		while (true) {
 			while (CurrentNode != null) {
@@ -211,8 +203,7 @@ class Tree5 {
 			if (!s.isEmpty()) {
 				try {
 					CurrentNode = s.pop();
-				} catch (Chap9_Tree.ObjectStack5.EmptyGenericStackException e) {
-					// TODO Auto-generated catch block
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				System.out.println(" " + CurrentNode.data);
@@ -226,7 +217,7 @@ class Tree5 {
 	// 난이도: 최상급 구현
 	// queue를 사용한 구현
 	{
-		ObjectQueue5 q = new ObjectQueue5(20);
+		Queue<TreeNode5> q = new LinkedList<>();
 		Queue<Integer> que = new LinkedList<>();
 
 	}
@@ -235,7 +226,7 @@ class Tree5 {
 		// inorder traversal시에 정렬된 결과가 나와야 한다
 		TreeNode5 p = root;
 		TreeNode5 q = null;
-
+		return false;
 	}
 
 	boolean delete(int num) {// binary search tree에서 임의 값을 갖는 노드를 찾아 삭제한다.
@@ -269,7 +260,7 @@ class Tree5 {
 
 	boolean search(int num) {// num 값을 binary search tree에서 검색
 		TreeNode5 p = root;
-
+		return false;
 	}
 }
 

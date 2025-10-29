@@ -192,8 +192,8 @@ class CircularList {
 		if (x == null || y == null || x.data == null || y.data == null) {
 		    return;
 		}
-		if (cc.compare(x.data, y.data) <= 0) {		// 이 부분에서 Exception in thread "main" java.lang.NullPointerException: 
-			head = x;								// Cannot invoke "String.compareTo(String)" because "d1.no" is null
+		if (cc.compare(x.data, y.data) <= 0) {		
+			head = x;								
 			x = x.link;
 		}
 		else {
@@ -224,8 +224,8 @@ class CircularList {
 		while(tail.link != null) {
 			tail = tail.link;
 		}
-		tail.link = head;
-		first = tail.link;
+		first.link = head;
+		tail.link = first;
 	}
 }
 
